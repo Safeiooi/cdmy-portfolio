@@ -53,14 +53,15 @@ import {
   Monitor,
   Smartphone,
   CheckCircle2,
-  Info, 
+  Info,
   Settings,
   Activity,
   Box,
   Cpu as Chip,
   Layers as Stack,
   MousePointer2,
-  Send
+  Send,
+  MessageCircle as Facebook
 } from 'lucide-react';
 
 // --- GEMINI API SETUP ---
@@ -134,7 +135,7 @@ const content = {
         },
         {
           role: "Customer Service IT Gadget",
-          company: "Central Retail Corp (Power Buy)",
+          company: "Power Buy (Central Retail)",
           period: "Part-time",
           desc: "ให้คำแนะนำลูกค้าเกี่ยวกับสินค้าไอทีและ Gadget, จัดการสต็อกสินค้า",
           icon: Cpu,
@@ -281,7 +282,7 @@ const content = {
         },
         {
           role: "Customer Service IT Gadget",
-          company: "Central Retail Corp (Power Buy)",
+          company: "Power Buy (Central Retail)",
           period: "Part-time",
           desc: "Assisted customers with IT products/gadgets inquiries and managed inventory.",
           icon: Cpu,
@@ -724,7 +725,7 @@ export default function App() {
           </a>
           <div className="flex items-center gap-6 px-8 border-l border-gray-200">
             <a href="https://github.com/Safeiooi" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors"><Code className="w-6 h-6" /></a>
-            <a href="https://www.facebook.com/kamphon.prayoonhan" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors"><Code className="w-6 h-6" /></a>
+            <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors"><Facebook className="w-6 h-6" /></a>
             <a href="mailto:kamphon203@gmail.com" className="text-gray-400 hover:text-orange-500 transition-colors"><Mail className="w-6 h-6" /></a>
           </div>
         </div>
@@ -919,7 +920,7 @@ export default function App() {
 
               <div className="mt-12 pt-8 border-t border-gray-50 grid grid-cols-3 md:grid-cols-6 gap-4">
                 <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Github size={20} className="text-gray-400 group-hover:text-gray-900" /></div>
+                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Code size={20} className="text-gray-400 group-hover:text-gray-900" /></div>
                   <span className="text-[8px] font-bold uppercase text-gray-400">GitHub</span>
                 </div>
                 <div className="flex flex-col items-center gap-2 group">
@@ -931,7 +932,7 @@ export default function App() {
                   <span className="text-[8px] font-bold uppercase text-gray-400">Sheets</span>
                 </div>
                 <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Code size={20} className="text-gray-400 group-hover:text-blue-600" /></div>
+                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Facebook size={20} className="text-gray-400 group-hover:text-blue-600" /></div>
                   <span className="text-[8px] font-bold uppercase text-gray-400">Facebook</span>
                 </div>
                 <div className="flex flex-col items-center gap-2 group">
@@ -1022,15 +1023,20 @@ export default function App() {
             <p className="text-gray-500 max-w-xl mx-auto mb-10">
               พร้อมที่จะยกระดับธุรกิจของคุณด้วย AI และเทคโนโลยีสมัยใหม่แล้วหรือยัง? ติดต่อผมได้เลยครับ!
             </p>
-            <a href="mailto:kamphon203@gmail.com" className="inline-flex items-center gap-4 bg-orange-500 text-white font-bold py-5 px-12 rounded-full hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 group text-xl">
-              <Mail className="w-6 h-6" /> Say Hello <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </a>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a href="mailto:kamphon203@gmail.com" className="inline-flex items-center gap-4 bg-orange-500 text-white font-bold py-5 px-12 rounded-full hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 group text-xl">
+                <Mail className="w-6 h-6" /> Say Hello <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              </a>
+              <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-4 bg-[#1877F2] text-white font-bold py-5 px-12 rounded-full hover:bg-[#166fe5] transition-all shadow-lg shadow-blue-500/25 group text-xl">
+                <Facebook className="w-6 h-6" /> Facebook
+              </a>
+            </div>
           </div>
           
           <div className="pt-12 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
             <p>{t.footer.text}</p>
             <div className="flex gap-8">
-              <a href="https://www.facebook.com/kamphon.prayoonhan" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">Facebook</a>
+              <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">Facebook</a>
               <a href="https://github.com/Safeiooi" target="_blank" rel="noreferrer" className="hover:text-gray-900 transition-colors">GitHub</a>
               <a href="mailto:kamphon203@gmail.com" className="hover:text-orange-500 transition-colors">Email</a>
             </div>
@@ -1039,7 +1045,9 @@ export default function App() {
       </footer>
 
       {/* Modals */}
-      <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
+      {selectedSkill && (
+        <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
+      )}
     </div>
   );
 }
