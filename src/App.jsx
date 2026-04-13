@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Code, 
   Terminal, 
@@ -46,30 +46,16 @@ import {
   Smile,
   Check,
   Search,
-  Workflow,
   Database,
-  Server,
-  Cloud,
-  Monitor,
-  Smartphone,
-  CheckCircle2,
-  Info,
+  LineChart,
   Settings,
-  Activity,
-  Box,
-  Cpu as Chip,
-  Layers as Stack,
-  MousePointer2,
-  Send,
-  MessageCircle as Facebook
+  ShieldCheck,
+  Smartphone
 } from 'lucide-react';
-
-// --- GEMINI API SETUP ---
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+import { FaFacebook, FaGithub, FaLine, FaGoogleDrive, FaCloudflare } from 'react-icons/fa';
+import { SiCanva, SiGooglesheets } from 'react-icons/si';
 
 // --- DATA & TRANSLATIONS ---
-
 const content = {
   th: {
     nav: {
@@ -78,7 +64,7 @@ const content = {
       skills: "ทักษะ",
       works: "ผลงาน",
       media: "สื่อสร้างสรรค์",
-      ai: "AI Lab",
+      ai: "AI Showcase",
       contact: "ติดต่อ"
     },
     hero: {
@@ -135,7 +121,7 @@ const content = {
         },
         {
           role: "Customer Service IT Gadget",
-          company: "Power Buy (Central Retail)",
+          company: "Central Retail Corp (Power Buy)",
           period: "Part-time",
           desc: "ให้คำแนะนำลูกค้าเกี่ยวกับสินค้าไอทีและ Gadget, จัดการสต็อกสินค้า",
           icon: Cpu,
@@ -153,7 +139,7 @@ const content = {
     },
     skills: {
       title: "ความสามารถ (Skills)",
-      subtitle: "คลิกที่ปุ่มเพื่อดูรายละเอียดเพิ่มเติม",
+      subtitle: "เครื่องมือและเทคโนโลยีที่เชี่ยวชาญ",
       design: "Creative & Media Tools",
       dev: "General IT Support",
       tools: "Automation & Data"
@@ -164,31 +150,12 @@ const content = {
     },
     media: {
       title: "Creative Studio",
-      subtitle: "คลังผลงานวิดีโอ เพลง และกราฟิก (คลิกเพื่อเปิดดูไฟล์ต้นฉบับ)",
+      subtitle: "คลังผลงานวิดีโอ เพลง และกราฟิก",
     },
-    bots: {
-      title: "ระบบอัตโนมัติ & Chatbots",
-      subtitle: "โปรเจกต์ฝึกฝนการใช้ LINE API และ AppSheet",
-      bot1: {
-        name: "File Saver Bot",
-        desc: "บอทช่วยเก็บไฟล์อัตโนมัติ ดึงไฟล์จากห้องแชท LINE ไปบันทึกยัง Google Drive และส่งลิงก์กลับมาทันที ช่วยลดปัญหาไฟล์หมดอายุในแชท",
-        tags: ["LINE API", "Google Drive API", "Cloud Functions"]
-      },
-      bot2: {
-        name: "Smart Planner Assistant",
-        desc: "บอทผู้ช่วยวางแผนงาน แจ้งเตือน และสรุปงาน เชื่อมต่อ Google Calendar เพื่อลงตาราง และส่งข้อมูลเข้า Google Sheets เพื่อวิเคราะห์ KPI",
-        tags: ["Task Management", "Calendar API", "Sheets API", "Data Analysis"],
-        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://line.me/R/ti/p/@745rnmvz", 
-        qrLabel: "LINE ID: @745rnmvz"
-      }
-    },
-    ai: {
-      title: "AI Agent Collaboration",
-      subtitle: "การทำงานร่วมกับ AI ยุคใหม่เพื่อเพิ่มประสิทธิภาพสูงสุด",
-      placeholder: "เช่น: อยากเก็บข้อมูลการลาของพนักงาน, ต้องคอยส่งสรุปยอดขายเข้าไลน์ทุกวัน...",
-      button: "ขอไอเดียลดงานด้วย AI",
-      loading: "กำลังวิเคราะห์โซลูชัน...",
-      resultTitle: "คำแนะนำจาก Kamphon (AI Version):"
+    aiShowcase: {
+      title: "AI Agent Visual Showcase",
+      subtitle: "การเชื่อมต่อ Manus AI กับเครื่องมือต่างๆ เพื่อเพิ่มประสิทธิภาพการทำงาน",
+      desc: "แสดงให้เห็นว่า AI Agent สามารถทำงานร่วมกับแอปพลิเคชันที่คุณใช้ทุกวันได้อย่างไร"
     },
     hobbies: {
       title: "งานอดิเรก & ความสำเร็จ",
@@ -205,7 +172,7 @@ const content = {
         },
         {
           title: "Weekend Home Cook",
-          role: "Amateur Cook (พ่อครัวมือสมัครเล่น)",
+          role: "Amateur Cook",
           desc: "พอทำทานได้ครับ ไม่ได้เก่งระดับเชฟแต่ตั้งใจทำทุกจาน เน้นเมนูง่ายๆ ทำทานเองในวันหยุดครับ (ส่วนในรูปคือกำลังใจสำคัญ ผู้ช่วยเชฟประจำตัวครับ 🐱)",
           tags: ["Cooking for Fun", "Simple Recipes", "Cat Lover"],
           img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=1000",
@@ -282,7 +249,7 @@ const content = {
         },
         {
           role: "Customer Service IT Gadget",
-          company: "Power Buy (Central Retail)",
+          company: "Central Retail Corp (Power Buy)",
           period: "Part-time",
           desc: "Assisted customers with IT products/gadgets inquiries and managed inventory.",
           icon: Cpu,
@@ -300,7 +267,7 @@ const content = {
     },
     skills: {
       title: "Skills & Expertise",
-      subtitle: "Click on each badge for more details",
+      subtitle: "Tools and technologies I use",
       design: "Creative & Media Tools",
       dev: "General IT Support",
       tools: "Automation & Data"
@@ -311,31 +278,12 @@ const content = {
     },
     media: {
       title: "Creative Studio",
-      subtitle: "Video, Music, and Graphic gallery (Click to view original files)",
+      subtitle: "Video, Music, and Graphic gallery",
     },
-    bots: {
-      title: "Automation & Chatbots",
-      subtitle: "LINE API and AppSheet training projects",
-      bot1: {
-        name: "File Saver Bot",
-        desc: "Automatically saves files from LINE chat to Google Drive and returns a link, preventing file expiration.",
-        tags: ["LINE API", "Google Drive API", "Cloud Functions"]
-      },
-      bot2: {
-        name: "Smart Planner Assistant",
-        desc: "Helps with task planning, reminders, and summaries. Connects to Google Calendar and Sheets for KPI analysis.",
-        tags: ["Task Management", "Calendar API", "Sheets API", "Data Analysis"],
-        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://line.me/R/ti/p/@745rnmvz",
-        qrLabel: "LINE ID: @745rnmvz"
-      }
-    },
-    ai: {
-      title: "AI Agent Collaboration",
-      subtitle: "Working with modern AI to maximize efficiency",
-      placeholder: "e.g., I want to track employee leave, need to send daily sales summaries to LINE...",
-      button: "Get AI Idea",
-      loading: "Analyzing solution...",
-      resultTitle: "Advice from Kamphon (AI Version):"
+    aiShowcase: {
+      title: "AI Agent Visual Showcase",
+      subtitle: "Connecting Manus AI with various tools to maximize efficiency",
+      desc: "Showing how AI Agents can work with the apps you use every day."
     },
     hobbies: {
       title: "Hobbies & Achievements",
@@ -367,687 +315,492 @@ const content = {
   }
 };
 
-const skillDetails = {
-  "Google Workspace": {
-    desc: "จัดการเอกสาร ข้อมูล และการทำงานร่วมกันอย่างเป็นระบบผ่าน Docs, Sheets, Slides และ Forms",
-    connect: ["Cloud Storage", "Team Collaboration", "Data Management"]
-  },
-  "CapCut": {
-    desc: "ตัดต่อวิดีโอสั้นสำหรับ Social Media เน้นความรวดเร็วและเอฟเฟกต์ที่ทันสมัย",
-    connect: ["TikTok", "Reels", "YouTube Shorts"]
-  },
-  "Canva": {
-    desc: "ออกแบบสื่อกราฟิกทุกรูปแบบอย่างรวดเร็วและสวยงาม ทั้ง Presentation, Poster และ Social Media Content",
-    connect: ["Visual Design", "Branding", "Marketing Materials"]
-  },
-  "Adobe Photoshop": {
-    desc: "ตกแต่งภาพถ่ายขั้นสูง ออกแบบกราฟิกที่ต้องการความละเอียดและเลเยอร์ที่ซับโซน",
-    connect: ["Photo Editing", "Digital Art", "UI Elements"]
-  },
-  "Hardware/Network": {
-    desc: "แก้ไขปัญหาคอมพิวเตอร์เบื้องต้น ติดตั้งอุปกรณ์ต่อพ่วง และดูแลระบบเครือข่ายภายในสำนักงาน",
-    connect: ["IT Troubleshooting", "LAN/Wi-Fi", "PC Assembly"]
-  },
-  "Printer Setup": {
-    desc: "ติดตั้งและตั้งค่าเครื่องพิมพ์ทุกรูปแบบ ทั้งแบบ Network, USB และการแชร์เครื่องพิมพ์ในวงแลน",
-    connect: ["Office Equipment", "Driver Installation", "Maintenance"]
-  },
-  "Microsoft Office": {
-    desc: "ใช้งาน Word, Excel, PowerPoint ขั้นสูงเพื่อการจัดการงานเอกสารและวิเคราะห์ข้อมูล",
-    connect: ["Documentation", "Spreadsheets", "Presentations"]
-  },
-  "Wordpress": {
-    desc: "สร้างและดูแลเว็บไซต์เบื้องต้น จัดการคอนเทนต์ และติดตั้ง Plugin ที่จำเป็น",
-    connect: ["CMS", "Web Management", "Blogging"]
-  },
-  "LINE OA & API": {
-    desc: "สร้างระบบตอบโต้ผ่าน LINE OA เชื่อมต่อ API เพื่อทำ Chatbot และระบบแจ้งเตือนอัตโนมัติ",
-    connect: ["Messaging API", "Rich Menu", "Automation"]
-  },
-  "AppSheet": {
-    desc: "พัฒนาแอปพลิเคชันแบบ No-code เพื่อจัดการฐานข้อมูลและกระบวนการทำงานในองค์กร",
-    connect: ["Google Sheets", "Mobile Apps", "Workflow Automation"]
-  },
-  "Data Analysis": {
-    desc: "วิเคราะห์ข้อมูลเบื้องต้นเพื่อหา Insight และนำเสนอผ่าน Dashboard หรือรายงานที่เข้าใจง่าย",
-    connect: ["Data Visualization", "Excel Pivot", "KPI Tracking"]
-  }
-};
-
-const webProjects = [
+const projects = [
   {
-    title: "Prime x Legal Platform",
-    desc: "แพลตฟอร์มรวบรวมข้อมูลและบริการด้านกฎหมาย ออกแบบ UI ให้ใช้งานง่ายและดูเป็นมืออาชีพ",
+    title: "Prime x Legal",
+    desc: "เว็บไซต์ที่ปรึกษากฎหมายและธุรกิจ ดีไซน์เรียบหรู น่าเชื่อถือ (Professional Consulting Platform)",
     url: "https://kamphon203.wixsite.com/prime-x-legal",
-    tags: ["Wix", "UI Design", "Legal Tech"],
-    color: "from-blue-600 to-blue-400",
+    tags: ["Wix", "Business", "Legal Consulting"],
+    color: "from-amber-500 to-orange-600",
     featured: true
   },
   {
-    title: "Canva Portfolio Showcase",
-    desc: "รวบรวมงานออกแบบกราฟิกและสื่อต่างๆ ที่สร้างสรรค์ผ่าน Canva",
-    url: "https://www.canva.com/design/DAGf7797-p8/uW_m79X76997797-p8/view",
-    tags: ["Canva", "Graphic Design"],
-    color: "from-purple-600 to-purple-400",
-    featured: false
+    title: "Canva Design Portfolio",
+    desc: "รวมผลงานการออกแบบกราฟิกและพรีเซนเทชั่นด้วย Canva ดีไซน์ทันสมัย สื่อสารชัดเจน",
+    url: "https://prime-property-group.my.canva.site/prime-property-group-co-ltd",
+    tags: ["Canva", "Graphic Design", "Presentation"],
+    color: "from-purple-600 to-pink-500"
   },
   {
-    title: "The Best Property",
-    desc: "เว็บไซต์แนะนำอสังหาริมทรัพย์ เน้นการแสดงผลรูปภาพที่สวยงามและข้อมูลที่ครบถ้วน",
-    url: "https://kamphon203.wixsite.com/the-best",
-    tags: ["Wix", "Real Estate", "Web Design"],
-    color: "from-amber-600 to-amber-400",
-    featured: false
+    title: "The Best",
+    desc: "Modern corporate identity website presentation.",
+    url: "https://pggitdev.github.io/ppg-files/thebest.html",
+    tags: ["HTML", "CSS", "Animation"],
+    color: "from-purple-500 to-indigo-500"
   },
   {
     title: "Handyman Auto",
-    desc: "เว็บไซต์บริการดูแลรักษารถยนต์ ให้ข้อมูลบริการและช่องทางการติดต่อ",
-    url: "https://kamphon203.wixsite.com/handyman-auto",
-    tags: ["Wix", "Automotive", "Business Site"],
-    color: "from-red-600 to-red-400",
-    featured: false
+    desc: "Marketing and content management for automotive services.",
+    url: "https://pggitdev.github.io/ppg-files/sensesaimai56.html",
+    tags: ["Marketing", "Content", "Web"],
+    color: "from-emerald-500 to-teal-500"
   }
 ];
 
-const mediaItems = [
-  { title: "Corporate Video", type: "Video", icon: Video, url: "#", color: "text-red-500" },
-  { title: "Social Media Ads", type: "Graphic", icon: Palette, url: "#", color: "text-blue-500" },
-  { title: "Music Production", type: "Audio", icon: Music, url: "#", color: "text-purple-500" },
-  { title: "Short Film Edit", type: "Video", icon: Film, url: "#", color: "text-orange-500" },
-  { title: "Logo Design", type: "Graphic", icon: Layout, url: "#", color: "text-green-500" }
+const aiIntegrations = [
+  { name: "Facebook", icon: FaFacebook, color: "text-blue-600", desc: "Auto-post & Reply" },
+  { name: "Canva", icon: SiCanva, color: "text-blue-400", desc: "Design Automation" },
+  { name: "GitHub", icon: FaGithub, color: "text-gray-800", desc: "Code Management" },
+  { name: "Cloudflare", icon: FaCloudflare, color: "text-orange-500", desc: "Deployment" },
+  { name: "Google Sheets", icon: SiGooglesheets, color: "text-green-600", desc: "Data Sync" },
+  { name: "LINE API", icon: FaLine, color: "text-green-500", desc: "Chatbot Service" }
 ];
 
-// --- HELPER COMPONENTS ---
+// --- COMPONENTS ---
 
-const Typewriter = ({ texts, speed = 100, pause = 2000 }) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [reverse, setReverse] = useState(false);
-
-  useEffect(() => {
-    if (subIndex === texts[index].length + 1 && !reverse) {
-      const timeout = setTimeout(() => setReverse(true), pause);
-      return () => clearTimeout(timeout);
-    }
-
-    if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => (prev + 1) % texts.length);
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setSubIndex((prev) => prev + (reverse ? -1 : 1));
-      setDisplayedText(texts[index].substring(0, subIndex));
-    }, reverse ? speed / 2 : speed);
-
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse, texts, speed, pause]);
-
-  return (
-    <span className="inline-block min-w-[200px] text-left">
-      {displayedText}
-      <span className="animate-pulse">|</span>
-    </span>
-  );
-};
+const EndfieldLogo = () => (
+  <motion.div 
+    className="flex items-center gap-2"
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
+    <div className="relative w-10 h-10 flex items-center justify-center">
+      <motion.div 
+        className="absolute inset-0 border-2 border-orange-500 rounded-sm rotate-45"
+        animate={{ rotate: [45, 225, 45] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
+      <div className="w-6 h-6 bg-orange-500 flex items-center justify-center text-white font-bold text-xs">
+        KP
+      </div>
+    </div>
+    <div className="flex flex-col leading-none">
+      <span className="text-lg font-black tracking-tighter text-gray-900">KAMPHON</span>
+      <span className="text-[10px] font-bold tracking-[0.2em] text-orange-500">ENDFIELD.SYS</span>
+    </div>
+  </motion.div>
+);
 
 const SectionTitle = ({ title, subtitle }) => (
-  <div className="mb-12 text-center">
-    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+  <motion.div 
+    className="mb-16 text-center"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >
+    <div className="inline-block mb-2">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-[2px] bg-orange-500" />
+        <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">Section</span>
+        <div className="w-8 h-[2px] bg-orange-500" />
+      </div>
+    </div>
+    <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
       {title}
     </h2>
-    {subtitle && <p className="text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
-    <div className="w-24 h-1 bg-orange-500 mx-auto mt-4 rounded-full"></div>
-  </div>
+    {subtitle && <p className="text-gray-500 max-w-2xl mx-auto font-medium">{subtitle}</p>}
+  </motion.div>
 );
 
-const SkillBadge = ({ icon: Icon, label, onClick }) => (
-  <button 
-    onClick={onClick}
-    className="flex items-center gap-2 bg-white border border-gray-200 px-4 py-2 rounded-full hover:bg-orange-50 hover:border-orange-200 transition-all cursor-pointer hover:scale-105 transform duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50"
-  >
-    <Icon size={18} className="text-orange-500" />
-    <span className="text-sm font-medium text-gray-700">{label}</span>
-  </button>
-);
-
-const SkillModal = ({ skill, onClose }) => {
-  if (!skill) return null;
-  const details = skillDetails[skill.label] || {
-    desc: "เครื่องมือที่ช่วยเพิ่มประสิทธิภาพการทำงาน",
-    connect: ["General Use"]
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
-      <div 
-        className="bg-white rounded-2xl p-8 max-w-md w-full relative shadow-2xl transform animate-in zoom-in-95 duration-200"
-        onClick={e => e.stopPropagation()}
-      >
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-          <X size={24} />
-        </button>
-
-        <div className="flex items-center gap-4 mb-6">
-          <div className="p-4 bg-orange-100 rounded-xl">
-            <skill.icon size={40} className="text-orange-500" />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900">{skill.label}</h3>
-        </div>
-
-        <div className="space-y-6">
-          <div>
-            <h4 className="text-orange-600 text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-              <Zap size={14} /> ความสามารถ (Capabilities)
-            </h4>
-            <p className="text-gray-600 text-sm leading-relaxed border-l-2 border-orange-500 pl-3">
-              {details.desc}
-            </p>
-          </div>
-
-          <div>
-            <h4 className="text-blue-600 text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-              <Share2 size={14} /> เชื่อมต่อกับ (Integrations)
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {details.connect.map((item, i) => (
-                <span key={i} className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-blue-600 text-xs font-medium">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ProjectCard = ({ project, className = "" }) => (
-  <a 
-    href={project.url} 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className={`group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl flex flex-col h-full hover:-translate-y-2 ${className}`}
-  >
-    <div className={`h-2 bg-gradient-to-r ${project.color}`} />
-    <div className="p-6 flex flex-col h-full">
-      <div className="flex justify-between items-start mb-4">
-        <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-orange-100 transition-colors">
-          {project.tags.includes('Canva') ? (
-             <Palette className="text-gray-600 group-hover:text-orange-600" size={24} />
-          ) : (
-             <Layout className="text-gray-600 group-hover:text-orange-600" size={24} />
-          )}
-        </div>
-        {project.featured && (
-           <div className="flex items-center gap-1 px-3 py-1 bg-amber-100 border border-amber-200 rounded-full">
-             <Star size={12} className="text-amber-600 fill-amber-600" />
-             <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wide">Featured</span>
-           </div>
-        )}
-        {!project.featured && (
-          <ExternalLink className="text-gray-400 group-hover:text-orange-500 transition-colors" size={20} />
-        )}
-      </div>
-      <h3 className={`font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors ${project.featured ? 'text-2xl' : 'text-xl'}`}>
-        {project.title}
-      </h3>
-      <p className="text-gray-600 text-sm mb-6 flex-grow">
-        {project.desc}
-      </p>
-      <div className="flex flex-wrap gap-2 mt-auto">
-        {project.tags.map((tag, i) => (
-          <span key={i} className="text-xs px-2 py-1 rounded-md bg-gray-50 text-gray-500 border border-gray-100">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  </a>
-);
-
-const MediaCard = ({ item }) => (
-  <a 
-    href={item.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 flex flex-col h-full group relative p-6 items-center text-center justify-center min-h-[180px] hover:bg-orange-50 hover:-translate-y-1"
-  >
-    <div className="mb-4 relative">
-        <div className="p-5 bg-gray-50 rounded-full group-hover:bg-orange-100 transition-all duration-300 shadow-sm">
-            <item.icon size={32} className={`${item.color}`} />
-        </div>
-        <div className="absolute -bottom-1 -right-1 bg-orange-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-            <ExternalLink size={12} />
-        </div>
-    </div>
-
-    <h3 className="font-bold text-gray-900 text-md mb-2 group-hover:text-orange-600 transition-colors">{item.title}</h3>
-    <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider font-medium">
-      {item.type}
-    </span>
-  </a>
-);
-
-const ExperienceTimeline = ({ items }) => (
-  <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
-    {items.map((item, index) => (
-      <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-400 group-hover:border-orange-500 group-hover:text-orange-500 transition-all duration-500 z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-          <item.icon size={18} />
-        </div>
-        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-          <div className="flex items-center justify-between space-x-2 mb-1">
-            <div className="font-bold text-gray-900">{item.role}</div>
-            <time className="font-mono text-xs text-orange-600">{item.period}</time>
-          </div>
-          <div className="text-orange-600 text-sm font-medium mb-2">{item.company}</div>
-          <div className="text-gray-600 text-sm leading-relaxed">{item.desc}</div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-// --- MAIN APP COMPONENT ---
-
-export default function App() {
+const App = () => {
   const [lang, setLang] = useState('th');
-  const [selectedSkill, setSelectedSkill] = useState(null);
-  const [aiInput, setAiInput] = useState("");
-  const [aiResult, setAiResult] = useState("");
-  const [isAiLoading, setIsAiLoading] = useState(false);
   const t = content[lang];
 
-  const handleAiConsult = async () => {
-    if (!aiInput.trim() || !genAI) return;
-    setIsAiLoading(true);
-    try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `You are Kamphon, an IT Support and Automation expert. A user asks: "${aiInput}". 
-      Suggest a solution using AppSheet, LINE API, or AI tools. Keep it concise, professional, and in ${lang === 'th' ? 'Thai' : 'English'}.`;
-      const result = await model.generateContent(prompt);
-      setAiResult(result.response.text());
-    } catch (error) {
-      setAiResult("Error connecting to AI. Please try again later.");
-    }
-    setIsAiLoading(false);
-  };
-
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-orange-500/30 selection:text-orange-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-orange-500 selection:text-white overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center font-black text-white transform group-hover:rotate-12 transition-transform duration-300">K</div>
-            <span className="font-bold tracking-tighter text-xl group-hover:text-orange-500 transition-colors">Kamphon.dev</span>
-          </div>
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <EndfieldLogo />
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-500">
-            <a href="#about" className="hover:text-orange-500 transition-colors">{t.nav.about}</a>
-            <a href="#experience" className="hover:text-orange-500 transition-colors">{t.nav.exp}</a>
-            <a href="#works" className="hover:text-orange-500 transition-colors">{t.nav.works}</a>
-            <a href="#ai" className="hover:text-orange-500 transition-colors">{t.nav.ai}</a>
-            <button 
-              onClick={() => setLang(lang === 'th' ? 'en' : 'th')}
-              className="px-3 py-1 border border-gray-200 rounded-full hover:border-orange-500 hover:text-orange-500 transition-all text-xs"
-            >
-              {lang === 'th' ? 'EN' : 'TH'}
-            </button>
+          <div className="hidden md:flex items-center gap-8">
+            {Object.entries(t.nav).map(([key, label]) => (
+              <a 
+                key={key} 
+                href={`#${key}`} 
+                className="text-sm font-bold text-gray-500 hover:text-orange-500 transition-colors tracking-wide uppercase"
+              >
+                {label}
+              </a>
+            ))}
           </div>
+
+          <button 
+            onClick={() => setLang(lang === 'th' ? 'en' : 'th')}
+            className="px-4 py-2 border-2 border-gray-900 text-xs font-black hover:bg-gray-900 hover:text-white transition-all tracking-widest uppercase"
+          >
+            {lang === 'th' ? 'EN' : 'TH'}
+          </button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header className="relative z-10 pt-40 pb-20 md:pt-60 md:pb-32 px-6 container mx-auto text-center">
-        <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 text-sm font-medium animate-fade-in-up">
-          OPEN TO COLLABORATION
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-gray-900">
-          {t.hero.greeting} <span className="text-orange-500">Kamphon.</span>
-        </h1>
-        
-        <div className="text-xl md:text-3xl text-gray-600 h-10 mb-8 font-light flex justify-center items-center gap-2">
-           I am a <span className="text-orange-500 font-bold"><Typewriter texts={t.hero.roles} /></span>
-        </div>
-
-        <p className="text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed">
-          {t.hero.desc}
-        </p>
-        
-        <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
-          <a href="#works" className="px-10 py-4 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 group">
-            {t.hero.cta} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <div className="flex items-center gap-6 px-8 border-l border-gray-200">
-            <a href="https://github.com/Safeiooi" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors"><Code className="w-6 h-6" /></a>
-            <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors"><Facebook className="w-6 h-6" /></a>
-            <a href="mailto:kamphon203@gmail.com" className="text-gray-400 hover:text-orange-500 transition-colors"><Mail className="w-6 h-6" /></a>
-          </div>
-        </div>
-      </header>
-
-      {/* About & Skills */}
-      <section id="about" className="relative z-10 py-24 border-t border-gray-50 bg-gray-50/50">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-10">
-              <div>
-                <h3 className="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-900">
-                  <User className="text-orange-500" /> {t.about.title}
-                </h3>
-                <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
-                   <div className="flex items-start gap-4">
-                      <div className="p-2 bg-orange-50 rounded-lg"><User size={20} className="text-orange-500" /></div>
-                      <div>
-                        <span className="text-[10px] text-gray-400 uppercase font-bold tracking-widest block mb-1">Name</span>
-                        <span className="text-gray-900 font-bold text-lg">{t.about.name}</span>
-                      </div>
-                   </div>
-                   <div className="flex items-start gap-4">
-                      <div className="p-2 bg-blue-50 rounded-lg"><GraduationCap size={20} className="text-blue-500" /></div>
-                      <div>
-                        <span className="text-[10px] text-gray-400 uppercase font-bold tracking-widest block mb-1">Education</span>
-                        <span className="text-gray-900 font-bold">{t.about.education}</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
-              
-              <div className="space-y-6">
-                 <p className="text-gray-600 leading-relaxed text-lg">
-                   {t.about.text}
-                 </p>
-                 
-                 <div className="grid grid-cols-1 gap-6">
-                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                       <h4 className="text-orange-600 text-xs font-bold uppercase mb-3 flex items-center gap-2 tracking-wider">
-                         <Smile size={16} /> {t.about.personality.title}
-                       </h4>
-                       <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                         {t.about.personality.desc}
-                       </p>
-                       <div className="flex flex-wrap gap-2">
-                         {t.about.personality.tags.map((tag, i) => (
-                           <span key={i} className="text-[10px] px-3 py-1 bg-orange-50 text-orange-600 font-bold rounded-full border border-orange-100">
-                             {tag}
-                           </span>
-                         ))}
-                       </div>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                       <h4 className="text-blue-600 text-xs font-bold uppercase mb-3 flex items-center gap-2 tracking-wider">
-                         <Lightbulb size={16} /> {t.about.workStyle.title}
-                       </h4>
-                       <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                         {t.about.workStyle.desc}
-                       </p>
-                       <div className="flex flex-wrap gap-2">
-                         {t.about.workStyle.tags.map((tag, i) => (
-                           <span key={i} className="text-[10px] px-3 py-1 bg-blue-50 text-blue-600 font-bold rounded-full border border-blue-100">
-                             {tag}
-                           </span>
-                         ))}
-                       </div>
-                    </div>
-                 </div>
+      <section id="hero" className="relative pt-40 pb-20 px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 text-orange-600 rounded-full mb-6">
+              <ScanLine size={16} />
+              <span className="text-xs font-bold tracking-wider uppercase">{t.hero.greeting}</span>
+            </div>
+            <h1 className="text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-[0.9] tracking-tighter">
+              KAMPHON <br />
+              <span className="text-orange-500">PRAYOONHAN</span>
+            </h1>
+            <div className="flex flex-wrap gap-3 mb-8">
+              {t.hero.roles.map((role, i) => (
+                <span key={i} className="px-4 py-2 bg-gray-100 text-gray-700 text-xs font-bold rounded-sm border-l-4 border-orange-500">
+                  {role}
+                </span>
+              ))}
+            </div>
+            <p className="text-xl text-gray-600 mb-10 max-w-lg leading-relaxed font-medium">
+              {t.hero.desc}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="#works" className="px-8 py-4 bg-orange-500 text-white font-black rounded-sm hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 flex items-center gap-2 group">
+                {t.hero.cta} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <div className="flex items-center gap-4 px-6">
+                <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors"><FaFacebook size={24} /></a>
+                <a href="https://github.com/Safeiooi" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors"><FaGithub size={24} /></a>
+                <a href="mailto:kamphon203@gmail.com" className="text-gray-400 hover:text-orange-500 transition-colors"><Mail size={24} /></a>
               </div>
             </div>
+          </motion.div>
 
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm h-full">
-              <div className="flex justify-between items-center mb-10">
-                <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                  <Terminal size={16} />
-                  {t.skills.title}
-                </h4>
-              </div>
-              
-              <div className="space-y-10">
-                <div>
-                  <span className="text-[10px] text-orange-600 mb-4 block uppercase font-bold tracking-widest">{t.skills.design}</span>
-                  <div className="flex flex-wrap gap-3">
-                    <SkillBadge icon={Briefcase} label="Google Workspace" onClick={() => setSelectedSkill({icon: Briefcase, label: "Google Workspace"})} />
-                    <SkillBadge icon={Video} label="CapCut" onClick={() => setSelectedSkill({icon: Video, label: "CapCut"})} />
-                    <SkillBadge icon={Globe} label="Canva" onClick={() => setSelectedSkill({icon: Globe, label: "Canva"})} />
-                    <SkillBadge icon={Layers} label="Adobe Photoshop" onClick={() => setSelectedSkill({icon: Layers, label: "Adobe Photoshop"})} />
-                  </div>
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden relative border-4 border-gray-900 shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" 
+                alt="IT Tech" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="flex items-center gap-3 text-white mb-2">
+                  <div className="w-2 h-2 bg-orange-500 animate-pulse" />
+                  <span className="text-xs font-bold tracking-widest uppercase">System Status: Active</span>
                 </div>
-                <div>
-                  <span className="text-[10px] text-blue-600 mb-4 block uppercase font-bold tracking-widest">{t.skills.dev}</span>
-                  <div className="flex flex-wrap gap-3">
-                    <SkillBadge icon={Wrench} label="Hardware/Network" onClick={() => setSelectedSkill({icon: Wrench, label: "Hardware/Network"})} />
-                    <SkillBadge icon={Cpu} label="Printer Setup" onClick={() => setSelectedSkill({icon: Cpu, label: "Printer Setup"})} />
-                    <SkillBadge icon={FileText} label="Microsoft Office" onClick={() => setSelectedSkill({icon: FileText, label: "Microsoft Office"})} />
-                    <SkillBadge icon={Globe} label="Wordpress" onClick={() => setSelectedSkill({icon: Globe, label: "Wordpress"})} />
-                  </div>
-                </div>
-                <div>
-                  <span className="text-[10px] text-green-600 mb-4 block uppercase font-bold tracking-widest">{t.skills.tools}</span>
-                  <div className="flex flex-wrap gap-3">
-                    <SkillBadge icon={Bot} label="LINE OA & API" onClick={() => setSelectedSkill({icon: Bot, label: "LINE OA & API"})} />
-                    <SkillBadge icon={Calendar} label="AppSheet" onClick={() => setSelectedSkill({icon: Calendar, label: "AppSheet"})} />
-                    <SkillBadge icon={BarChart} label="Data Analysis" onClick={() => setSelectedSkill({icon: BarChart, label: "Data Analysis"})} />
-                  </div>
+                <div className="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-orange-500"
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 2, delay: 1 }}
+                  />
                 </div>
               </div>
             </div>
-          </div>
+            {/* Decorative Elements */}
+            <div className="absolute -top-6 -right-6 w-24 h-24 border-t-4 border-r-4 border-orange-500" />
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 border-b-4 border-l-4 border-gray-900" />
+          </motion.div>
         </div>
       </section>
 
-      {/* Experience Timeline */}
-      <section id="experience" className="relative z-10 py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <SectionTitle title={t.experience.title} subtitle={t.experience.subtitle} />
-          <div className="max-w-4xl mx-auto">
-            <ExperienceTimeline items={t.experience.items} />
-          </div>
-        </div>
-      </section>
-
-      {/* Web Portfolio */}
-      <section id="works" className="relative z-10 py-24 container mx-auto px-6">
-        <SectionTitle 
-          title={t.portfolio.title} 
-          subtitle={t.portfolio.subtitle} 
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {webProjects.map((project, index) => (
-            <ProjectCard 
-              key={index} 
-              project={project} 
-              className={project.featured ? "md:col-span-2 lg:col-span-2" : ""}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* AI Lab & Agent Showcase */}
-      <section id="ai" className="relative z-10 py-24 bg-gray-50 border-y border-gray-100">
-        <div className="container mx-auto px-6">
-          <SectionTitle title={t.ai.title} subtitle={t.ai.subtitle} />
+      {/* About Section */}
+      <section id="about" className="py-32 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.about.title} />
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Visual Workflow Showcase */}
-            <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-20 bg-orange-500/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              
-              <h4 className="text-xl font-bold mb-8 flex items-center gap-3 text-gray-900">
-                <Workflow size={24} className="text-orange-500" /> AI Agent Workflow
-              </h4>
-              
-              <div className="space-y-8 relative z-10">
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center border border-orange-100">
-                    <MessageSquare className="text-orange-500" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Step 01: Input</div>
-                    <div className="text-gray-900 font-bold">รับโจทย์ปัญหาผ่านภาษาธรรมชาติ</div>
-                  </div>
-                </div>
-                
-                <div className="ml-6 h-8 border-l-2 border-dashed border-gray-200"></div>
-                
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center border border-blue-100">
-                    <Brain className="text-blue-500" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Step 02: Analysis</div>
-                    <div className="text-gray-900 font-bold">AI Agent (Manus) วางแผนและวิเคราะห์</div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div 
+              className="md:col-span-2 bg-white p-10 border-2 border-gray-900 shadow-[8px_8px_0_0_#111827]"
+              whileHover={{ x: -4, y: -4, shadow: "12px 12px 0 0 #111827" }}
+            >
+              <h3 className="text-2xl font-black mb-6 flex items-center gap-3">
+                <User className="text-orange-500" /> {t.about.name}
+              </h3>
+              <p className="text-lg text-gray-600 leading-relaxed mb-8 font-medium">
+                {t.about.text}
+              </p>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="p-6 bg-gray-50 border-l-4 border-orange-500">
+                  <h4 className="font-black text-sm uppercase tracking-wider mb-2">{t.about.personality.title}</h4>
+                  <p className="text-sm text-gray-500 mb-4">{t.about.personality.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.about.personality.tags.map(tag => (
+                      <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-white border border-gray-200 rounded-sm">{tag}</span>
+                    ))}
                   </div>
                 </div>
-
-                <div className="ml-6 h-8 border-l-2 border-dashed border-gray-200"></div>
-
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center border border-green-100">
-                    <Zap className="text-green-500" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Step 03: Execution</div>
-                    <div className="text-gray-900 font-bold">ดำเนินการอัตโนมัติผ่านเครื่องมือต่างๆ</div>
+                <div className="p-6 bg-gray-50 border-l-4 border-gray-900">
+                  <h4 className="font-black text-sm uppercase tracking-wider mb-2">{t.about.workStyle.title}</h4>
+                  <p className="text-sm text-gray-500 mb-4">{t.about.workStyle.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.about.workStyle.tags.map(tag => (
+                      <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-white border border-gray-200 rounded-sm">{tag}</span>
+                    ))}
                   </div>
                 </div>
               </div>
+            </motion.div>
 
-              <div className="mt-12 pt-8 border-t border-gray-50 grid grid-cols-3 md:grid-cols-6 gap-4">
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Code size={20} className="text-gray-400 group-hover:text-gray-900" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">GitHub</span>
+            <div className="space-y-8">
+              <div className="bg-gray-900 text-white p-8 rounded-sm">
+                <GraduationCap className="text-orange-500 mb-4" size={32} />
+                <h4 className="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2">Education</h4>
+                <p className="font-bold leading-tight">{t.about.education}</p>
+              </div>
+              <div className="bg-orange-500 text-white p-8 rounded-sm">
+                <Award className="text-white mb-4" size={32} />
+                <h4 className="text-xs font-bold tracking-widest uppercase text-orange-200 mb-2">Age</h4>
+                <p className="text-3xl font-black">{t.about.age}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Showcase Section */}
+      <section id="ai" className="py-32 px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.aiShowcase.title} subtitle={t.aiShowcase.subtitle} />
+          
+          <div className="relative bg-gray-900 rounded-3xl p-12 overflow-hidden">
+            {/* Background Animation */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500 via-transparent to-transparent" />
+            </div>
+
+            <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full mb-8 border border-orange-500/30">
+                  <Bot size={20} />
+                  <span className="text-sm font-black tracking-widest uppercase">Manus AI Integration</span>
                 </div>
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-orange-50 transition-colors"><Cloud size={20} className="text-gray-400 group-hover:text-orange-500" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">Cloudflare</span>
+                <h3 className="text-4xl font-black text-white mb-6 leading-tight">
+                  Automate Your Workflow <br />
+                  <span className="text-orange-500">Across All Platforms</span>
+                </h3>
+                <p className="text-gray-400 text-lg mb-10 leading-relaxed">
+                  {t.aiShowcase.desc}
+                </p>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  {aiIntegrations.map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <item.icon className={`${item.color} text-2xl`} />
+                      <div>
+                        <h4 className="text-white font-bold text-sm">{item.name}</h4>
+                        <p className="text-gray-500 text-[10px] uppercase tracking-wider">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-green-50 transition-colors"><Database size={20} className="text-gray-400 group-hover:text-green-600" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">Sheets</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors"><Facebook size={20} className="text-gray-400 group-hover:text-blue-600" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">Facebook</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-purple-50 transition-colors"><Palette size={20} className="text-gray-400 group-hover:text-purple-600" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">Canva</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-green-50 transition-colors"><Bot size={20} className="text-gray-400 group-hover:text-green-500" /></div>
-                  <span className="text-[8px] font-bold uppercase text-gray-400">LINE API</span>
+              </div>
+
+              <div className="relative">
+                <div className="aspect-square bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-full flex items-center justify-center p-8 border border-white/10">
+                  <motion.div 
+                    className="w-full h-full bg-gray-800 rounded-2xl border-2 border-orange-500 shadow-2xl shadow-orange-500/20 p-8 flex flex-col justify-center items-center text-center"
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-orange-500/40">
+                      <Cpu size={40} className="text-white" />
+                    </div>
+                    <h4 className="text-2xl font-black text-white mb-2">AI AGENT ACTIVE</h4>
+                    <div className="flex gap-1 mb-6">
+                      {[1,2,3,4,5].map(i => (
+                        <motion.div 
+                          key={i}
+                          className="w-1 h-4 bg-orange-500"
+                          animate={{ height: [4, 16, 4] }}
+                          transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.1 }}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-400 text-sm font-medium">
+                      Processing tasks for <br />
+                      <span className="text-white">Kamphon's Portfolio</span>
+                    </p>
+                  </motion.div>
+                  
+                  {/* Orbiting Icons */}
+                  {aiIntegrations.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute p-3 bg-white rounded-full shadow-xl"
+                      animate={{ 
+                        rotate: 360,
+                        x: Math.cos(i * (360 / aiIntegrations.length) * (Math.PI / 180)) * 180,
+                        y: Math.sin(i * (360 / aiIntegrations.length) * (Math.PI / 180)) * 180
+                      }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
+                      <item.icon className={`${item.color} text-xl`} />
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Interactive AI Lab */}
-            <div className="space-y-6">
-              <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg">
-                <textarea 
-                  value={aiInput}
-                  onChange={(e) => setAiInput(e.target.value)}
-                  placeholder={t.ai.placeholder}
-                  className="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all min-h-[150px] mb-4"
-                />
-                <button 
-                  onClick={handleAiConsult}
-                  disabled={isAiLoading}
-                  className="w-full py-4 bg-orange-500 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 flex items-center justify-center gap-3 disabled:opacity-50"
-                >
-                  {isAiLoading ? (
-                    <><div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> {t.ai.loading}</>
-                  ) : (
-                    <><Sparkles size={20} /> {t.ai.button}</>
-                  )}
-                </button>
-              </div>
-
-              {aiResult && (
-                <div className="bg-orange-50 border border-orange-100 p-6 rounded-2xl animate-in fade-in slide-in-from-bottom-4">
-                  <h5 className="text-orange-600 font-bold uppercase text-xs mb-3 tracking-widest flex items-center gap-2">
-                    <Bot size={16} /> {t.ai.resultTitle}
-                  </h5>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {aiResult}
-                  </p>
+      {/* Experience Section */}
+      <section id="exp" className="py-32 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.experience.title} subtitle={t.experience.subtitle} />
+          
+          <div className="space-y-6">
+            {t.experience.items.map((item, i) => (
+              <motion.div 
+                key={i}
+                className="group bg-white p-8 border-2 border-gray-900 flex flex-col md:flex-row gap-8 items-start md:items-center hover:bg-orange-50 transition-all"
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-16 h-16 bg-gray-900 text-white flex items-center justify-center shrink-0">
+                  <item.icon size={32} />
                 </div>
-              )}
-            </div>
+                <div className="flex-grow">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                    <h3 className="text-2xl font-black text-gray-900">{item.role}</h3>
+                    <span className="text-sm font-black text-orange-500 uppercase tracking-widest">{item.period}</span>
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-500 mb-4">{item.company}</h4>
+                  <p className="text-gray-600 font-medium">{item.desc}</p>
+                </div>
+                <div className="hidden md:block">
+                  <ChevronRight className="text-gray-300 group-hover:text-orange-500 transition-colors" size={40} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Works Section */}
+      <section id="works" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.portfolio.title} subtitle={t.portfolio.subtitle} />
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {projects.map((project, i) => (
+              <motion.a 
+                key={i}
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                className={`group relative overflow-hidden border-4 border-gray-900 ${project.featured ? 'md:col-span-2' : ''}`}
+                whileHover={{ y: -8 }}
+              >
+                <div className={`h-2 bg-gradient-to-r ${project.color}`} />
+                <div className="p-10 bg-white">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="p-4 bg-gray-100 group-hover:bg-orange-500 group-hover:text-white transition-all">
+                      <Layout size={32} />
+                    </div>
+                    {project.featured && (
+                      <span className="px-4 py-1 bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest">Featured Project</span>
+                    )}
+                  </div>
+                  <h3 className="text-3xl font-black mb-4 group-hover:text-orange-500 transition-colors">{project.title}</h3>
+                  <p className="text-gray-600 text-lg mb-8 font-medium max-w-2xl">{project.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-widest">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="absolute bottom-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ExternalLink size={32} className="text-orange-500" />
+                </div>
+              </motion.a>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Hobbies Section */}
-      <section id="hobbies" className="relative z-10 py-24 container mx-auto px-6">
-        <SectionTitle title={t.hobbies.title} subtitle={t.hobbies.subtitle} />
-        <div className="grid md:grid-cols-2 gap-8">
-          {t.hobbies.items.map((hobby, index) => (
-            <div key={index} className="bg-white border border-gray-100 rounded-3xl overflow-hidden group hover:shadow-xl transition-all">
-              <div className="h-64 overflow-hidden relative">
-                <img src={hobby.img} alt={hobby.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-6">
-                  <div className="flex items-center gap-2 text-orange-400 mb-1">
-                    <hobby.icon size={20} />
-                    <span className="text-xs font-bold uppercase tracking-widest">{hobby.role}</span>
+      <section id="media" className="py-32 px-6 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.hobbies.title} subtitle={t.hobbies.subtitle} />
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            {t.hobbies.items.map((hobby, i) => (
+              <motion.div 
+                key={i}
+                className="group relative overflow-hidden rounded-2xl border-2 border-white/10 hover:border-orange-500 transition-all"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img src={hobby.img} alt={hobby.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                </div>
+                <div className="p-8 bg-gray-800/50 backdrop-blur-md">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-orange-500 rounded-lg">
+                      <hobby.icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black">{hobby.title}</h3>
+                      <p className="text-orange-500 text-xs font-bold uppercase tracking-widest">{hobby.role}</p>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{hobby.title}</h3>
+                  <p className="text-gray-400 font-medium mb-6">{hobby.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {hobby.tags.map(tag => (
+                      <span key={tag} className="text-[10px] font-bold px-3 py-1 bg-white/5 border border-white/10 rounded-full">{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="p-8">
-                <p className="text-gray-600 mb-6 leading-relaxed">{hobby.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {hobby.tags.map((tag, i) => (
-                    <span key={i} className="text-[10px] px-3 py-1 bg-gray-50 text-gray-500 border border-gray-100 rounded-full font-bold">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <SectionTitle title={t.nav.contact} />
+          <div className="bg-white border-4 border-gray-900 p-12 shadow-[16px_16px_0_0_#f97316]">
+            <h3 className="text-4xl font-black mb-8">LET'S WORK <span className="text-orange-500">TOGETHER</span></h3>
+            <div className="flex flex-col gap-4">
+              <a href="mailto:kamphon203@gmail.com" className="flex items-center justify-center gap-4 p-6 bg-gray-900 text-white font-black text-xl hover:bg-orange-500 transition-all group">
+                <Mail size={28} /> kamphon203@gmail.com
+                <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+              </a>
+              <div className="grid grid-cols-2 gap-4">
+                <a href="tel:0825385515" className="flex items-center justify-center gap-3 p-4 border-2 border-gray-900 font-black hover:bg-gray-100 transition-all">
+                  <Phone size={20} /> 082-538-5515
+                </a>
+                <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 p-4 bg-[#1877F2] text-white font-black hover:opacity-90 transition-all">
+                  <FaFacebook size={20} /> FACEBOOK
+                </a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="relative z-10 py-20 border-t border-gray-100 bg-gray-50">
-        <div className="container mx-auto px-6 text-center">
-          <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">LET'S <span className="text-orange-500">COLLABORATE.</span></h2>
-            <p className="text-gray-500 max-w-xl mx-auto mb-10">
-              พร้อมที่จะยกระดับธุรกิจของคุณด้วย AI และเทคโนโลยีสมัยใหม่แล้วหรือยัง? ติดต่อผมได้เลยครับ!
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a href="mailto:kamphon203@gmail.com" className="inline-flex items-center gap-4 bg-orange-500 text-white font-bold py-5 px-12 rounded-full hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 group text-xl">
-                <Mail className="w-6 h-6" /> Say Hello <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-              </a>
-              <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-4 bg-[#1877F2] text-white font-bold py-5 px-12 rounded-full hover:bg-[#166fe5] transition-all shadow-lg shadow-blue-500/25 group text-xl">
-                <Facebook className="w-6 h-6" /> Facebook
-              </a>
-            </div>
-          </div>
-          
-          <div className="pt-12 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-            <p>{t.footer.text}</p>
-            <div className="flex gap-8">
-              <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">Facebook</a>
-              <a href="https://github.com/Safeiooi" target="_blank" rel="noreferrer" className="hover:text-gray-900 transition-colors">GitHub</a>
-              <a href="mailto:kamphon203@gmail.com" className="hover:text-orange-500 transition-colors">Email</a>
-            </div>
-          </div>
-        </div>
+      <footer className="py-12 border-t border-gray-100 text-center">
+        <EndfieldLogo />
+        <p className="mt-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
+          {t.footer.text}
+        </p>
       </footer>
-
-      {/* Modals */}
-      {selectedSkill && (
-        <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
-      )}
     </div>
   );
-}
+};
+
+export default App;
