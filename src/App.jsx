@@ -199,6 +199,16 @@ const SectionTitle = ({ title, subtitle, note }) => (
   </div>
 );
 
+const SkillBadge = ({ icon: Icon, label, onClick }) => (
+  <button 
+    onClick={onClick}
+    className="flex items-center gap-2 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-all cursor-pointer hover:scale-105 transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 hover:border-blue-500/30"
+  >
+    <Icon size={18} className="text-blue-600 dark:text-blue-400" />
+    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
+  </button>
+);
+
 const AppContent = () => {
   const [lang, setLang] = useState('th');
   const [activeSkill, setActiveSkill] = useState(null);
@@ -281,6 +291,43 @@ const AppContent = () => {
         </div>
       </section>
 
+      {/* About Section (Restored) */}
+      <section id="about" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.about.title} />
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              <div className="p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl">
+                <h3 className="text-2xl font-bold mb-4">{t.about.name}</h3>
+                <p className="text-blue-600 dark:text-blue-400 font-bold mb-4">{t.about.age} | {t.about.education}</p>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{t.about.text}</p>
+              </div>
+              <div className="p-8 bg-blue-600 text-white rounded-3xl shadow-xl shadow-blue-600/20">
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><Smile /> {t.about.personality.title}</h3>
+                <p className="mb-6 opacity-90">{t.about.personality.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {t.about.personality.tags.map((tag, i) => (
+                    <span key={i} className="px-3 py-1 bg-white/20 rounded-full text-xs font-bold">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="p-8 bg-gray-900 text-white rounded-3xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-32 bg-purple-600/20 rounded-full blur-3xl" />
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400"><Zap /> {t.about.workStyle.title}</h3>
+                <p className="mb-6 text-gray-300">{t.about.workStyle.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {t.about.workStyle.tags.map((tag, i) => (
+                    <span key={i} className="px-3 py-1 bg-purple-600/20 border border-purple-600/30 rounded-full text-xs font-bold text-purple-300">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
       <section id="exp" className="py-20 px-6 bg-white dark:bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
@@ -288,8 +335,8 @@ const AppContent = () => {
           <div className="grid gap-6">
             {t.experience.items.map((item, i) => (
               <div key={i} className="group flex flex-col md:flex-row gap-6 p-8 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl hover:border-blue-500/50 transition-all">
-                <div className={`p-4 rounded-2xl bg-${item.color}-500/10 border border-${item.color}-500/20 h-fit`}>
-                  <item.icon className={`text-${item.color}-500`} size={32} />
+                <div className={`p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 h-fit`}>
+                  <item.icon className={`text-blue-600 dark:text-blue-400`} size={32} />
                 </div>
                 <div className="flex-grow">
                   <div className="flex flex-wrap justify-between items-start mb-4">
@@ -307,8 +354,41 @@ const AppContent = () => {
         </div>
       </section>
 
+      {/* Skills Section (Restored) */}
+      <section id="skills" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.skills.title} subtitle={t.skills.subtitle} />
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-blue-600"><Palette size={20} /> {t.skills.design}</h3>
+              <div className="flex flex-wrap gap-3">
+                {["Photoshop", "Illustrator", "Premiere Pro", "CapCut", "Canva"].map(s => (
+                  <SkillBadge key={s} icon={Palette} label={s} onClick={() => setActiveSkill({label: s, icon: Palette})} />
+                ))}
+              </div>
+            </div>
+            <div className="p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-purple-600"><Wrench size={20} /> {t.skills.dev}</h3>
+              <div className="flex flex-wrap gap-3">
+                {["Basic Hardware", "Software Setup", "Network Basic", "Basic Server"].map(s => (
+                  <SkillBadge key={s} icon={Wrench} label={s} onClick={() => setActiveSkill({label: s, icon: Wrench})} />
+                ))}
+              </div>
+            </div>
+            <div className="p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-green-600"><Zap size={20} /> {t.skills.tools}</h3>
+              <div className="flex flex-wrap gap-3">
+                {["AppSheet", "LINE API", "Google Workspace", "Automation"].map(s => (
+                  <SkillBadge key={s} icon={Zap} label={s} onClick={() => setActiveSkill({label: s, icon: Zap})} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Portfolio Section */}
-      <section id="works" className="py-20 px-6">
+      <section id="works" className="py-20 px-6 bg-white dark:bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.portfolio.title} subtitle={t.portfolio.subtitle} />
           <div className="grid md:grid-cols-3 gap-8">
@@ -329,6 +409,46 @@ const AppContent = () => {
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, j) => (
                       <span key={j} className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Media & Bots Section (Restored) */}
+      <section id="media" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.media.title} subtitle={t.media.subtitle} />
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {mediaItems.map((item, i) => (
+              <a key={i} href={item.url} className="p-6 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl flex items-center gap-4 hover:border-purple-500/50 transition-all group">
+                <div className={`p-4 rounded-2xl bg-gray-100 dark:bg-white/5 ${item.color}`}><item.icon size={24} /></div>
+                <div>
+                  <h4 className="font-bold group-hover:text-purple-600 transition-colors">{item.title}</h4>
+                  <span className="text-xs opacity-50 uppercase tracking-widest">{item.type}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <SectionTitle title={t.bots.title} subtitle={t.bots.subtitle} />
+          <div className="grid md:grid-cols-2 gap-8">
+            {[t.bots.bot1, t.bots.bot2].map((bot, i) => (
+              <div key={i} className="p-8 bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-[2.5rem] relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-32 bg-green-500/10 rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="p-4 bg-green-500/20 rounded-2xl text-green-400"><Bot size={32} /></div>
+                    {bot.qrCode && <img src={bot.qrCode} alt="QR" className="w-20 h-20 rounded-lg border-2 border-white/10" />}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">{bot.name}</h3>
+                  <p className="text-gray-400 mb-6 leading-relaxed">{bot.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {bot.tags.map((tag, j) => (
+                      <span key={j} className="px-3 py-1 bg-white/10 rounded-full text-xs font-bold">{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -392,6 +512,23 @@ const AppContent = () => {
 
       {/* Modals */}
       {activeProject && <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />}
+      {activeSkill && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setActiveSkill(null)}>
+          <div className="bg-white dark:bg-gray-900 p-8 rounded-3xl max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setActiveSkill(null)} className="absolute top-4 right-4"><X /></button>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-4 bg-blue-500/10 rounded-2xl text-blue-600"><activeSkill.icon size={32} /></div>
+              <h3 className="text-2xl font-bold">{activeSkill.label}</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">{skillDetails[activeSkill.label]?.desc}</p>
+            <div className="flex flex-wrap gap-2">
+              {skillDetails[activeSkill.label]?.connect.map(c => (
+                <span key={c} className="px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-xs font-bold">{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
