@@ -377,7 +377,7 @@ const EndfieldLogo = () => (
     </div>
     <div className="flex flex-col leading-none">
       <span className="text-lg font-black tracking-tighter text-gray-900">KAMPHON</span>
-      <span className="text-[10px] font-bold tracking-[0.2em] text-orange-500">ENDFIELD.SYS</span>
+      <span className="text-[10px] font-bold tracking-[0.2em] text-orange-500">PRAYOONHAN.SYS</span>
     </div>
   </motion.div>
 );
