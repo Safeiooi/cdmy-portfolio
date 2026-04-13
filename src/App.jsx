@@ -50,7 +50,11 @@ import {
   LineChart,
   Settings,
   ShieldCheck,
-  Smartphone
+  Smartphone,
+  Heart,
+  Coffee,
+  Target,
+  Rocket
 } from 'lucide-react';
 import { FaFacebook, FaGithub, FaLine, FaGoogleDrive, FaCloudflare } from 'react-icons/fa';
 import { SiCanva, SiGooglesheets } from 'react-icons/si';
@@ -139,10 +143,11 @@ const content = {
     },
     skills: {
       title: "ความสามารถ (Skills)",
-      subtitle: "เครื่องมือและเทคโนโลยีที่เชี่ยวชาญ",
+      subtitle: "เครื่องมือและทักษะที่ใช้ในการขับเคลื่อนงาน",
       design: "Creative & Media Tools",
       dev: "General IT Support",
-      tools: "Automation & Data"
+      tools: "Automation & Data",
+      soft: "Soft Skills & Mindset"
     },
     portfolio: {
       title: "ผลงานเว็บไซต์ (Web Projects)",
@@ -267,10 +272,11 @@ const content = {
     },
     skills: {
       title: "Skills & Expertise",
-      subtitle: "Tools and technologies I use",
+      subtitle: "Tools and technologies I use to drive results",
       design: "Creative & Media Tools",
       dev: "General IT Support",
-      tools: "Automation & Data"
+      tools: "Automation & Data",
+      soft: "Soft Skills & Mindset"
     },
     portfolio: {
       title: "Web Portfolio",
@@ -315,6 +321,69 @@ const content = {
   }
 };
 
+const skillDetails = {
+  "Google Workspace": {
+    desc: "จัดการเอกสาร (Docs), ตารางงาน (Sheets) และการทำงานร่วมกันในทีมแบบ Real-time",
+    connect: ["AppSheet", "Google Calendar", "Gmail", "Google Drive"]
+  },
+  "CapCut": {
+    desc: "ตัดต่อวิดีโอสั้น (Short-form) สำหรับ Social Media ใส่เอฟเฟกต์และเสียงประกอบได้อย่างรวดเร็ว",
+    connect: ["TikTok", "Instagram Reels", "YouTube Shorts", "Facebook"]
+  },
+  "Canva": {
+    desc: "ออกแบบกราฟิก พรีเซนเทชั่น และสื่อโฆษณาต่างๆ ได้อย่างสวยงามและรวดเร็ว",
+    connect: ["Social Media", "Print Media", "Websites", "Brand Identity"]
+  },
+  "Adobe Photoshop": {
+    desc: "ตกแต่งภาพถ่าย รีทัช และสร้างสรรค์งานกราฟิกขั้นสูง",
+    connect: ["Lightroom", "Illustrator", "Premiere Pro", "After Effects"]
+  },
+  "Hardware/Network": {
+    desc: "ติดตั้ง ดูแลรักษา และแก้ไขปัญหาอุปกรณ์คอมพิวเตอร์และระบบเครือข่ายพื้นฐาน (LAN/WiFi)",
+    connect: ["Printers", "Routers", "Servers", "Office Devices"]
+  },
+  "Printer Setup": {
+    desc: "ติดตั้งไดรเวอร์ แก้ไขปัญหากระดาษติด และตั้งค่าการพิมพ์ผ่านเครือข่าย",
+    connect: ["Network Sharing", "Scan to Email", "Maintenance"]
+  },
+  "Microsoft Office": {
+    desc: "จัดการงานเอกสาร (Word), การนำเสนอ (PowerPoint) และคำนวณข้อมูล (Excel) อย่างมืออาชีพ",
+    connect: ["OneDrive", "Outlook", "Teams", "SharePoint"]
+  },
+  "Wordpress": {
+    desc: "ดูแลและอัปเดตเนื้อหาเว็บไซต์ ปรับแต่งธีมและปลั๊กอินพื้นฐาน",
+    connect: ["WooCommerce", "SEO Tools", "Google Analytics"]
+  },
+  "LINE OA & API": {
+    desc: "จัดการบัญชี LINE Official Account, สร้าง Rich Menu และเชื่อมต่อ API เพื่อทำระบบอัตโนมัติ",
+    connect: ["Flex Message", "Webhooks", "Chatbots", "CRM"]
+  },
+  "AppSheet": {
+    desc: "พัฒนาแอปพลิเคชันสำหรับองค์กรแบบ No-Code เพื่อจัดการข้อมูลและ Workflow",
+    connect: ["Google Sheets", "Google Calendar", "Email Automation", "PDF Generation"]
+  },
+  "Data Analysis": {
+    desc: "รวบรวมและวิเคราะห์ข้อมูลเพื่อหาแนวโน้มและสรุปผลเพื่อการตัดสินใจ",
+    connect: ["Google Looker Studio", "Excel Pivot Tables", "Business Reports"]
+  },
+  "Problem Solving": {
+    desc: "ความสามารถในการวิเคราะห์ปัญหาและหาทางออกที่เหมาะสมที่สุดภายใต้ข้อจำกัด",
+    connect: ["Critical Thinking", "Analytical Skills"]
+  },
+  "Communication": {
+    desc: "สื่อสารข้อมูลที่ซับซ้อนให้เข้าใจง่าย ทั้งกับทีมงานและลูกค้า",
+    connect: ["Presentation", "Active Listening"]
+  },
+  "Adaptability": {
+    desc: "พร้อมเรียนรู้เทคโนโลยีใหม่ๆ และปรับตัวเข้ากับสภาพแวดล้อมที่เปลี่ยนแปลงตลอดเวลา",
+    connect: ["Growth Mindset", "Fast Learner"]
+  },
+  "Teamwork": {
+    desc: "ทำงานร่วมกับผู้อื่นได้อย่างราบรื่น เพื่อบรรลุเป้าหมายขององค์กร",
+    connect: ["Collaboration", "Empathy"]
+  }
+};
+
 const projects = [
   {
     title: "Prime x Legal",
@@ -329,7 +398,8 @@ const projects = [
     desc: "รวมผลงานการออกแบบกราฟิกและพรีเซนเทชั่นด้วย Canva ดีไซน์ทันสมัย สื่อสารชัดเจน",
     url: "https://prime-property-group.my.canva.site/prime-property-group-co-ltd",
     tags: ["Canva", "Graphic Design", "Presentation"],
-    color: "from-purple-600 to-pink-500"
+    color: "from-purple-600 to-pink-500",
+    featured: true
   },
   {
     title: "The Best",
@@ -339,11 +409,25 @@ const projects = [
     color: "from-purple-500 to-indigo-500"
   },
   {
-    title: "Handyman Auto",
-    desc: "Marketing and content management for automotive services.",
+    title: "Puri Portfolio",
+    desc: "Personal portfolio showcasing character and style.",
+    url: "https://pggitdev.github.io/ppg-files/Puri.html",
+    tags: ["Design", "Responsive", "Portfolio"],
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    title: "Sense Saimai 56",
+    desc: "Real estate or location showcase project.",
     url: "https://pggitdev.github.io/ppg-files/sensesaimai56.html",
-    tags: ["Marketing", "Content", "Web"],
+    tags: ["UI/UX", "Gallery", "Layout"],
     color: "from-emerald-500 to-teal-500"
+  },
+  {
+    title: "Project 4.1",
+    desc: "Experimental design and functional layout.",
+    url: "https://pggitdev.github.io/ppg-files/4.1.html",
+    tags: ["Experimental", "Web Tech"],
+    color: "from-orange-500 to-red-500"
   }
 ];
 
@@ -354,6 +438,44 @@ const aiIntegrations = [
   { name: "Cloudflare", icon: FaCloudflare, color: "text-orange-500", desc: "Deployment" },
   { name: "Google Sheets", icon: SiGooglesheets, color: "text-green-600", desc: "Data Sync" },
   { name: "LINE API", icon: FaLine, color: "text-green-500", desc: "Chatbot Service" }
+];
+
+const mediaItems = [
+  {
+    title: "My Creative Assets Folder",
+    type: "folder",
+    url: "https://drive.google.com/drive/folders/1uSlSHdOXbweXo0U8FxoGYkyBEkOnWoT2?usp=sharing",
+    icon: Folder,
+    color: "text-blue-400"
+  },
+  {
+    title: "Short Clip Showcase 1",
+    type: "video",
+    url: "https://drive.google.com/file/d/1MTxCRRwX0IpQMfCXEK50A_ml32mVRnds/view?usp=sharing",
+    icon: Film,
+    color: "text-pink-400"
+  },
+  {
+    title: "Short Clip Showcase 2",
+    type: "video",
+    url: "https://drive.google.com/file/d/14vRG2JB0gA7CNiw8Kq0ZZ80chWsx1li7/view?usp=sharing",
+    icon: Film,
+    color: "text-pink-400"
+  },
+  {
+    title: "Short Clip Showcase 3",
+    type: "video",
+    url: "https://drive.google.com/file/d/1b4BsMabp4SFESSE0oygtX04QWHH3gu9w/view?usp=sharing",
+    icon: Film,
+    color: "text-pink-400"
+  },
+  {
+    title: "AI Generated Music",
+    type: "audio",
+    url: "https://drive.google.com/file/d/16hruUsp0ooJEf_dNPEEHPMNBtb5M7Ji/view?usp=sharing",
+    icon: Music,
+    color: "text-green-400"
+  }
 ];
 
 // --- COMPONENTS ---
@@ -404,8 +526,75 @@ const SectionTitle = ({ title, subtitle }) => (
   </motion.div>
 );
 
+const SkillBadge = ({ icon: Icon, label, onClick, colorClass = "text-orange-500" }) => (
+  <motion.button 
+    onClick={onClick}
+    className="flex items-center gap-3 bg-white border-2 border-gray-900 px-5 py-3 rounded-sm hover:bg-orange-50 transition-all shadow-[4px_4px_0_0_#111827] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    <Icon size={20} className={colorClass} />
+    <span className="text-sm font-black text-gray-900 uppercase tracking-tight">{label}</span>
+  </motion.button>
+);
+
+const SkillModal = ({ skill, onClose }) => {
+  if (!skill) return null;
+  const details = skillDetails[skill.label] || {
+    desc: "เครื่องมือที่ช่วยเพิ่มประสิทธิภาพการทำงาน",
+    connect: ["General Use"]
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm" onClick={onClose}>
+      <motion.div 
+        className="bg-white border-4 border-gray-900 p-8 max-w-md w-full relative shadow-[12px_12px_0_0_#f97316]"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        onClick={e => e.stopPropagation()}
+      >
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 transition-colors">
+          <X size={24} />
+        </button>
+
+        <div className="flex items-center gap-4 mb-8">
+          <div className="p-4 bg-orange-500 text-white rounded-sm">
+            <skill.icon size={40} />
+          </div>
+          <h3 className="text-2xl font-black text-gray-900 uppercase tracking-tighter">{skill.label}</h3>
+        </div>
+
+        <div className="space-y-8">
+          <div>
+            <h4 className="text-orange-500 text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+              <Zap size={14} /> Capabilities
+            </h4>
+            <p className="text-gray-600 text-sm leading-relaxed font-medium border-l-4 border-gray-100 pl-4">
+              {details.desc}
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-gray-900 text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+              <Share2 size={14} /> Integrations
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {details.connect.map((item, i) => (
+                <span key={i} className="px-3 py-1 bg-gray-100 border border-gray-200 rounded-sm text-gray-700 text-[10px] font-black uppercase tracking-wider">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 const App = () => {
   const [lang, setLang] = useState('th');
+  const [selectedSkill, setSelectedSkill] = useState(null);
   const t = content[lang];
 
   return (
@@ -563,8 +752,93 @@ const App = () => {
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section id="skills" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.skills.title} subtitle={t.skills.subtitle} />
+          
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Hard Skills */}
+            <div className="space-y-10">
+              <div>
+                <h4 className="text-xs font-black text-orange-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                  <div className="w-2 h-2 bg-orange-500" /> {t.skills.design}
+                </h4>
+                <div className="flex flex-wrap gap-4">
+                  <SkillBadge icon={Briefcase} label="Google Workspace" onClick={() => setSelectedSkill({icon: Briefcase, label: "Google Workspace"})} />
+                  <SkillBadge icon={Video} label="CapCut" onClick={() => setSelectedSkill({icon: Video, label: "CapCut"})} />
+                  <SkillBadge icon={Globe} label="Canva" onClick={() => setSelectedSkill({icon: Globe, label: "Canva"})} />
+                  <SkillBadge icon={Layers} label="Adobe Photoshop" onClick={() => setSelectedSkill({icon: Layers, label: "Adobe Photoshop"})} />
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-black text-gray-900 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                  <div className="w-2 h-2 bg-gray-900" /> {t.skills.dev}
+                </h4>
+                <div className="flex flex-wrap gap-4">
+                  <SkillBadge icon={Wrench} label="Hardware/Network" onClick={() => setSelectedSkill({icon: Wrench, label: "Hardware/Network"})} colorClass="text-gray-900" />
+                  <SkillBadge icon={Cpu} label="Printer Setup" onClick={() => setSelectedSkill({icon: Cpu, label: "Printer Setup"})} colorClass="text-gray-900" />
+                  <SkillBadge icon={FileText} label="Microsoft Office" onClick={() => setSelectedSkill({icon: FileText, label: "Microsoft Office"})} colorClass="text-gray-900" />
+                  <SkillBadge icon={Globe} label="Wordpress" onClick={() => setSelectedSkill({icon: Globe, label: "Wordpress"})} colorClass="text-gray-900" />
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-black text-orange-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                  <div className="w-2 h-2 bg-orange-500" /> {t.skills.tools}
+                </h4>
+                <div className="flex flex-wrap gap-4">
+                  <SkillBadge icon={Bot} label="LINE OA & API" onClick={() => setSelectedSkill({icon: Bot, label: "LINE OA & API"})} />
+                  <SkillBadge icon={Calendar} label="AppSheet" onClick={() => setSelectedSkill({icon: Calendar, label: "AppSheet"})} />
+                  <SkillBadge icon={BarChart} label="Data Analysis" onClick={() => setSelectedSkill({icon: BarChart, label: "Data Analysis"})} />
+                </div>
+              </div>
+            </div>
+
+            {/* Soft Skills & Mindset */}
+            <div className="bg-gray-900 rounded-3xl p-10 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-20 bg-orange-500/10 rounded-full blur-3xl" />
+              <h4 className="text-xs font-black text-orange-500 uppercase tracking-[0.3em] mb-10 flex items-center gap-3 relative z-10">
+                <div className="w-2 h-2 bg-orange-500" /> {t.skills.soft}
+              </h4>
+              
+              <div className="grid sm:grid-cols-2 gap-8 relative z-10">
+                {[
+                  { icon: Target, label: "Problem Solving", color: "text-blue-400" },
+                  { icon: MessageSquare, label: "Communication", color: "text-green-400" },
+                  { icon: Rocket, label: "Adaptability", color: "text-purple-400" },
+                  { icon: Heart, label: "Teamwork", color: "text-red-400" }
+                ].map((skill, i) => (
+                  <motion.div 
+                    key={i} 
+                    className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer"
+                    onClick={() => setSelectedSkill({icon: skill.icon, label: skill.label})}
+                    whileHover={{ y: -5 }}
+                  >
+                    <skill.icon className={`${skill.color} mb-4`} size={32} />
+                    <h5 className="text-lg font-black uppercase tracking-tighter">{skill.label}</h5>
+                    <p className="text-gray-500 text-xs mt-2 font-medium">Click to view details</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-12 p-6 bg-orange-500/10 border border-orange-500/20 rounded-2xl relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <Coffee className="text-orange-500" />
+                  <h5 className="font-black uppercase tracking-widest text-sm">Always Learning</h5>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                  "I believe that the best results come from a combination of the right tools, sufficient time, and a mindset that never stops questioning 'Why'."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI Showcase Section */}
-      <section id="ai" className="py-32 px-6 overflow-hidden">
+      <section id="ai" className="py-32 px-6 overflow-hidden bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.aiShowcase.title} subtitle={t.aiShowcase.subtitle} />
           
@@ -655,7 +929,7 @@ const App = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="exp" className="py-32 px-6 bg-gray-50">
+      <section id="exp" className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.experience.title} subtitle={t.experience.subtitle} />
           
@@ -689,31 +963,31 @@ const App = () => {
       </section>
 
       {/* Works Section */}
-      <section id="works" className="py-32 px-6">
+      <section id="works" className="py-32 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.portfolio.title} subtitle={t.portfolio.subtitle} />
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, i) => (
               <motion.a 
                 key={i}
                 href={project.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`group relative overflow-hidden border-4 border-gray-900 ${project.featured ? 'md:col-span-2' : ''}`}
+                className={`group relative overflow-hidden border-4 border-gray-900 bg-white ${project.featured ? 'md:col-span-2' : ''}`}
                 whileHover={{ y: -8 }}
               >
                 <div className={`h-2 bg-gradient-to-r ${project.color}`} />
-                <div className="p-10 bg-white">
+                <div className="p-10">
                   <div className="flex justify-between items-start mb-6">
                     <div className="p-4 bg-gray-100 group-hover:bg-orange-500 group-hover:text-white transition-all">
-                      <Layout size={32} />
+                      {project.tags.includes('Canva') ? <Palette size={32} /> : <Layout size={32} />}
                     </div>
                     {project.featured && (
                       <span className="px-4 py-1 bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest">Featured Project</span>
                     )}
                   </div>
-                  <h3 className="text-3xl font-black mb-4 group-hover:text-orange-500 transition-colors">{project.title}</h3>
+                  <h3 className="text-3xl font-black mb-4 group-hover:text-orange-500 transition-colors uppercase tracking-tighter">{project.title}</h3>
                   <p className="text-gray-600 text-lg mb-8 font-medium max-w-2xl">{project.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => (
@@ -730,8 +1004,32 @@ const App = () => {
         </div>
       </section>
 
+      {/* Media Section */}
+      <section id="media" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle title={t.media.title} subtitle={t.media.subtitle} />
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {mediaItems.map((item, i) => (
+              <motion.a 
+                key={i}
+                href={item.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group p-8 bg-white border-2 border-gray-900 text-center flex flex-col items-center justify-center hover:bg-orange-500 hover:text-white transition-all shadow-[6px_6px_0_0_#111827] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+                whileHover={{ scale: 1.05 }}
+              >
+                <item.icon size={40} className="mb-4 group-hover:text-white transition-colors" />
+                <h4 className="text-sm font-black uppercase tracking-tighter leading-tight">{item.title}</h4>
+                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 opacity-50">{item.type}</span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Hobbies Section */}
-      <section id="media" className="py-32 px-6 bg-gray-900 text-white">
+      <section id="hobbies" className="py-32 px-6 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.hobbies.title} subtitle={t.hobbies.subtitle} />
           
@@ -799,6 +1097,13 @@ const App = () => {
           {t.footer.text}
         </p>
       </footer>
+
+      {/* Skill Modal */}
+      <AnimatePresence>
+        {selectedSkill && (
+          <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
