@@ -291,7 +291,7 @@ const AppContent = () => {
         </div>
       </section>
 
-      {/* About Section (Restored) */}
+      {/* About Section */}
       <section id="about" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.about.title} />
@@ -354,7 +354,7 @@ const AppContent = () => {
         </div>
       </section>
 
-      {/* Skills Section (Restored) */}
+      {/* Skills Section */}
       <section id="skills" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.skills.title} subtitle={t.skills.subtitle} />
@@ -418,7 +418,7 @@ const AppContent = () => {
         </div>
       </section>
 
-      {/* Media & Bots Section (Restored) */}
+      {/* Media & Bots Section */}
       <section id="media" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <SectionTitle title={t.media.title} subtitle={t.media.subtitle} />
@@ -515,7 +515,7 @@ const AppContent = () => {
       {activeSkill && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setActiveSkill(null)}>
           <div className="bg-white dark:bg-gray-900 p-8 rounded-3xl max-w-md w-full relative" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setActiveSkill(null)} className="absolute top-4 right-4"><X /></button>
+            <button onClick={() => setActiveSkill(null)} className="absolute top-4 right-4 text-gray-500 dark:text-gray-400"><X /></button>
             <div className="flex items-center gap-4 mb-6">
               <div className="p-4 bg-blue-500/10 rounded-2xl text-blue-600"><activeSkill.icon size={32} /></div>
               <h3 className="text-2xl font-bold">{activeSkill.label}</h3>

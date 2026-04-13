@@ -10,7 +10,8 @@ export const ThemeProvider = ({ children }) => {
     if (savedTheme) {
       setIsDark(savedTheme === 'dark');
     } else {
-      setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDark(prefersDark);
     }
   }, []);
 
@@ -24,7 +25,9 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [isDark]);
 
-  const toggleTheme = () => setIsDark(!isDark);
+  const toggleTheme = () => {
+    setIsDark(prev => !prev);
+  };
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
@@ -33,4 +36,10 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
