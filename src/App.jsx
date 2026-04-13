@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { 
-  Code, 
+   
   Terminal, 
   Layout, 
   Bot, 
@@ -9,7 +9,7 @@ import {
   Calendar, 
   BarChart, 
   Globe, 
-  Github, 
+  Code, 
   Mail, 
   MessageCircle,
   Phone,
@@ -406,7 +406,7 @@ const skillDetails = {
   },
   "CapCut": {
     desc: "ตัดต่อวิดีโอสั้น (Short-form) สำหรับ Social Media ใส่เอฟเฟกต์และเสียงประกอบได้อย่างรวดเร็ว",
-    connect: ["TikTok", "Instagram Reels", "YouTube Shorts", "Facebook"]
+    connect: ["TikTok", "Instagram Reels", "YouTube Shorts", "MessageCircle"]
   },
   "Canva": {
     desc: "ออกแบบกราฟิก พรีเซนเทชั่น และสื่อโฆษณาต่างๆ ได้อย่างสวยงามและรวดเร็ว",
@@ -1353,7 +1353,7 @@ export default function Portfolio() {
             </a>
             <a href="https://www.facebook.com/kamphon.safe/" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#1877F2] text-white px-6 py-3 rounded-full font-bold hover:bg-[#166fe5] transition-colors hover:-translate-y-1">
               <MessageCircle size={20} />
-              Facebook
+              MessageCircle
             </a>
           </div>
         </div>
