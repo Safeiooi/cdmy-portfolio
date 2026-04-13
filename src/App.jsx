@@ -7,7 +7,8 @@ import {
   MessageSquare, ArrowRight, Play, Music, Film, Folder, Palette, MapPin, GraduationCap,
   User, Share2, Brain, Lightbulb, Smile, Check, Sun, Moon, Shield, Activity, Database,
   Search, Settings, Layers2, Monitor, Smartphone, Laptop, Server, HardDrive, Wifi,
-  MousePointer2, Keyboard, Command, Box, Package, Layers3, Zap2, Rocket, Info, AlertCircle
+  MousePointer2, Keyboard, Command, Box, Package, Layers3, Rocket, Info, AlertCircle,
+  Workflow, GitBranch, Cloud, Link
 } from 'lucide-react';
 
 import { ThemeProvider, useTheme } from './components/ThemeContext';
@@ -73,8 +74,34 @@ const content = {
       button: "GENERATE AI SOLUTION",
       loading: "ANALYZING SOLUTION...",
       resultTitle: "KAMPHON'S AI SUGGESTION:",
-      manusTitle: "POWERED BY MANUS AI",
-      manusDesc: "โปรเจกต์นี้ถูกสร้างและจัดการโดยใช้ Manus AI (Autonomous AI Agent) เพื่อเพิ่มประสิทธิภาพในการทำงานแบบอัตโนมัติ"
+      manusTitle: "POWERED BY MANUS AI (AUTONOMOUS AGENT)",
+      manusDesc: "โปรเจกต์นี้ถูกสร้างและจัดการโดยใช้ Manus AI เพื่อเพิ่มประสิทธิภาพในการทำงานแบบอัตโนมัติ",
+      collaborationTitle: "AI AGENT COLLABORATION WORKFLOW",
+      collaborationDesc: "แสดงขั้นตอนการทำงานร่วมกับ AI Agent ในการแก้ปัญหาและพัฒนาโปรเจกต์"
+    },
+    hobbies: {
+      title: "HOBBIES & ACHIEVEMENTS",
+      subtitle: "กิจกรรมยามว่างและการพัฒนาตนเอง",
+      items: [
+        {
+          title: "The 5%ers Funded Trader",
+          role: "Professional Forex Trader",
+          desc: "ผ่านการทดสอบและได้รับการรับรองเป็น Funded Trader จาก The 5%ers (Proprietary Trading Firm) พิสูจน์ความสามารถในการบริหารความเสี่ยงและทำกำไรอย่างสม่ำเสมอ",
+          tags: ["Forex Trading", "Risk Management", "Investment Analysis"],
+          img: "https://lh5.googleusercontent.com/d/1yGuhylTn-qqrfe8BuzgPb6Rwc1agBswB",
+          color: "yellow",
+          icon: TrendingUp
+        },
+        {
+          title: "Weekend Home Cook",
+          role: "Amateur Cook (พ่อครัวมือสมัครเล่น)",
+          desc: "พอทำทานได้ครับ ไม่ได้เก่งระดับเชฟแต่ตั้งใจทำทุกจาน เน้นเมนูง่ายๆ ทำทานเองในวันหยุดครับ (ส่วนในรูปคือกำลังใจสำคัญ ผู้ช่วยเชฟประจำตัวครับ 🐱)",
+          tags: ["Cooking for Fun", "Simple Recipes", "Cat Lover"],
+          img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=1000",
+          color: "orange",
+          icon: Utensils
+        }
+      ]
     },
     footer: { text: "© 2026 KAMPHON PRAYOONHAN. OVER THE FRONTIER / INTO THE FRONT." }
   },
@@ -123,12 +150,103 @@ const content = {
       button: "GENERATE AI SOLUTION",
       loading: "ANALYZING SOLUTION...",
       resultTitle: "KAMPHON'S AI SUGGESTION:",
-      manusTitle: "POWERED BY MANUS AI",
-      manusDesc: "This project is built and managed using Manus AI (Autonomous AI Agent) to enhance workflow automation."
+      manusTitle: "POWERED BY MANUS AI (AUTONOMOUS AGENT)",
+      manusDesc: "This project is built and managed using Manus AI to enhance workflow automation.",
+      collaborationTitle: "AI AGENT COLLABORATION WORKFLOW",
+      collaborationDesc: "Visualizing the collaboration between human and AI Agent in project development."
+    },
+    hobbies: {
+      title: "HOBBIES & ACHIEVEMENTS",
+      subtitle: "Personal interests and self-development",
+      items: [
+        {
+          title: "The 5%ers Funded Trader",
+          role: "Professional Forex Trader",
+          desc: "Certified as a Funded Trader by The 5%ers (Proprietary Trading Firm). Demonstrated consistent profitability and strict risk management skills.",
+          tags: ["Forex Trading", "Risk Management", "Investment Analysis"],
+          img: "https://lh5.googleusercontent.com/d/1yGuhylTn-qqrfe8BuzgPb6Rwc1agBswB",
+          color: "yellow",
+          icon: TrendingUp
+        },
+        {
+          title: "Weekend Home Cook",
+          role: "Amateur Cook",
+          desc: "I cook simple meals for myself. Not exactly a master chef, but I put my heart into it. (The photo shows my lovely sous-chef 🐱)",
+          tags: ["Cooking for Fun", "Simple Recipes", "Cat Lover"],
+          img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=1000",
+          color: "orange",
+          icon: Utensils
+        }
+      ]
     },
     footer: { text: "© 2026 KAMPHON PRAYOONHAN. OVER THE FRONTIER / INTO THE FRONT." }
   }
 };
+
+const webProjects = [
+  {
+    title: "Prime x Legal",
+    desc: "เว็บไซต์ที่ปรึกษากฎหมายและธุรกิจ ดีไซน์เรียบหรู น่าเชื่อถือ (Professional Consulting Platform)",
+    url: "https://kamphon203.wixsite.com/prime-x-legal",
+    tags: ["Wix", "Business", "Legal Consulting"],
+    color: "from-amber-500 to-orange-600",
+    featured: true,
+    problem: "ธุรกิจที่ปรึกษากฎหมายต้องการความน่าเชื่อถือสูง แต่เว็บไซต์เดิมดูไม่ทันสมัยและเข้าถึงยาก",
+    solution: "ออกแบบใหม่โดยเน้นความ Minimalist และใช้โทนสีที่ดูเป็นมืออาชีพ พร้อมระบบจองคิวปรึกษา",
+    result: "เพิ่มความน่าเชื่อถือและยอดผู้ติดต่อสอบถามผ่านเว็บไซต์ขึ้น 40%"
+  },
+  {
+    title: "Canva Design Portfolio",
+    desc: "รวมผลงานการออกแบบกราฟิกและพรีเซนเทชั่นด้วย Canva ดีไซน์ทันสมัย สื่อสารชัดเจน",
+    url: "https://prime-property-group.my.canva.site/prime-property-group-co-ltd",
+    tags: ["Canva", "Graphic Design", "Presentation"],
+    color: "from-purple-600 to-pink-500",
+    featured: true,
+    problem: "การนำเสนอผลงานอสังหาริมทรัพย์แบบเดิมดูน่าเบื่อและไม่ดึงดูดใจลูกค้า",
+    solution: "ใช้ Canva สร้างสื่อที่เน้น Visual Impact และการเล่าเรื่อง (Storytelling) ผ่านกราฟิก",
+    result: "ได้รับคำชมจากลูกค้าและช่วยให้ปิดการขายได้รวดเร็วขึ้น"
+  },
+  {
+    title: "The Best",
+    desc: "Modern corporate identity website presentation.",
+    url: "https://pggitdev.github.io/ppg-files/thebest.html",
+    tags: ["HTML", "CSS", "Animation"],
+    color: "from-purple-500 to-indigo-500",
+    problem: "ต้องการหน้าเว็บนำเสนอตัวตนของแบรนด์ที่ดูทันสมัยและมีลูกเล่น",
+    solution: "พัฒนาด้วย HTML/CSS และใส่ Animation เพื่อเพิ่มความน่าสนใจ",
+    result: "เป็นต้นแบบในการพัฒนาเว็บไซต์บริษัทในเครือ"
+  },
+  {
+    title: "Puri Portfolio",
+    desc: "Personal portfolio showcasing character and style.",
+    url: "https://pggitdev.github.io/ppg-files/Puri.html",
+    tags: ["Design", "Responsive", "Portfolio"],
+    color: "from-blue-500 to-cyan-500",
+    problem: "ต้องการพื้นที่แสดงผลงานส่วนตัวที่สะท้อนสไตล์เฉพาะตัว",
+    solution: "ออกแบบ Layout ที่เน้นความสะอาดตาและรองรับการแสดงผลทุกหน้าจอ",
+    result: "ใช้เป็นหน้าแนะนำตัวในการติดต่อประสานงานโปรเจกต์ต่างๆ"
+  },
+  {
+    title: "Sense Saimai 56",
+    desc: "Real estate or location showcase project.",
+    url: "https://pggitdev.github.io/ppg-files/sensesaimai56.html",
+    tags: ["UI/UX", "Gallery", "Layout"],
+    color: "from-emerald-500 to-teal-500",
+    problem: "การแสดงข้อมูลโครงการหมู่บ้านจัดสรรต้องการความชัดเจนและเห็นภาพรวม",
+    solution: "ทำ Gallery และ Layout ที่แบ่งสัดส่วนข้อมูลโครงการให้เข้าใจง่าย",
+    result: "ช่วยให้ลูกค้าตัดสินใจเข้าชมโครงการจริงได้ง่ายขึ้น"
+  },
+  {
+    title: "Project 4.1",
+    desc: "Experimental design and functional layout.",
+    url: "https://pggitdev.github.io/ppg-files/4.1.html",
+    tags: ["Experimental", "Web Tech"],
+    color: "from-orange-500 to-red-500",
+    problem: "ทดลองการจัดวาง Layout แบบใหม่ๆ ที่นอกเหนือจากมาตรฐานทั่วไป",
+    solution: "ใช้เทคนิค CSS Grid และ Flexbox ขั้นสูงในการจัดวางองค์ประกอบ",
+    result: "ได้เรียนรู้เทคนิคใหม่ๆ มาปรับใช้กับงานจริง"
+  }
+];
 
 const skillDetails = {
   "Photoshop": { desc: "ออกแบบกราฟิกขั้นสูง ตกแต่งภาพ และสร้างสื่อโฆษณา (Graphic Design & Photo Manipulation)", connect: ["Print Media", "Social Media", "Web Assets"] },
@@ -136,36 +254,35 @@ const skillDetails = {
   "Premiere Pro": { desc: "ตัดต่อวิดีโอระดับมืออาชีพ ใส่เอฟเฟกต์ และจัดการเสียง (Professional Video Editing)", connect: ["YouTube", "Corporate Video", "Marketing Content"] },
   "CapCut": { desc: "ตัดต่อวิดีโอสั้น (Short-form) สำหรับ Social Media ใส่เอฟเฟกต์และเสียงประกอบได้อย่างรวดเร็ว", connect: ["TikTok", "Instagram Reels", "YouTube Shorts", "Facebook"] },
   "Canva": { desc: "ออกแบบกราฟิก พรีเซนเทชั่น และสื่อโฆษณาต่างๆ ได้อย่างสวยงามและรวดเร็ว", connect: ["Social Media", "Print Media", "Websites", "Brand Identity"] },
-  "Basic Hardware": { desc: "ตรวจเช็คและแก้ไขปัญหาคอมพิวเตอร์เบื้องต้น (PC/Laptop Troubleshooting)", connect: ["Office IT", "Maintenance", "Setup"] },
-  "Software Setup": { desc: "ติดตั้งและตั้งค่าโปรแกรมต่างๆ ให้พร้อมใช้งาน (OS & Application Installation)", connect: ["Windows", "macOS", "Office Suite"] },
-  "Network Basic": { desc: "ดูแลระบบเครือข่ายเบื้องต้น และแก้ไขปัญหาการเชื่อมต่อ (Basic Networking & Connectivity)", connect: ["Wi-Fi", "LAN", "Printer Sharing"] },
-  "Basic Server": { desc: "ดูแลและจัดการ Server เบื้องต้น (Basic Server Management)", connect: ["File Server", "Backup", "User Access"] },
-  "AppSheet": { desc: "พัฒนา No-code Application เพื่อจัดการข้อมูลและลดขั้นตอนการทำงาน (No-code App Development)", connect: ["Google Sheets", "Automation", "Data Management"] },
-  "LINE API": { desc: "พัฒนา Chatbot และระบบแจ้งเตือนผ่าน LINE (LINE Bot & Messaging API)", connect: ["Messaging API", "Rich Menu", "LIFF"] },
-  "Google Workspace": { desc: "ใช้งานและจัดการเครื่องมือใน Google Workspace อย่างเต็มประสิทธิภาพ", connect: ["Docs", "Sheets", "Drive", "Forms"] },
-  "Automation": { desc: "สร้างระบบทำงานอัตโนมัติเพื่อลดภาระงานซ้ำซ้อน (Workflow Automation)", connect: ["Make.com", "Zapier", "Apps Script"] }
+  "Hardware/Network": { desc: "ติดตั้ง ดูแลรักษา และแก้ไขปัญหาอุปกรณ์คอมพิวเตอร์และระบบเครือข่ายพื้นฐาน (LAN/WiFi)", connect: ["Printers", "Routers", "Servers", "Office Devices"] },
+  "Printer Setup": { desc: "ติดตั้งไดรเวอร์ แก้ไขปัญหากระดาษติด และตั้งค่าการพิมพ์ผ่านเครือข่าย", connect: ["Network Sharing", "Scan to Email", "Maintenance"] },
+  "Microsoft Office": { desc: "จัดการงานเอกสาร (Word), การนำเสนอ (PowerPoint) และคำนวณข้อมูล (Excel) อย่างมืออาชีพ", connect: ["OneDrive", "Outlook", "Teams", "SharePoint"] },
+  "Wordpress": { desc: "ดูแลและอัปเดตเนื้อหาเว็บไซต์ ปรับแต่งธีมและปลั๊กอินพื้นฐาน", connect: ["WooCommerce", "SEO Tools", "Google Analytics"] },
+  "LINE OA & API": { desc: "จัดการบัญชี LINE Official Account, สร้าง Rich Menu และเชื่อมต่อ API เพื่อทำระบบอัตโนมัติ", connect: ["Flex Message", "Webhooks", "Chatbots", "CRM"] },
+  "AppSheet": { desc: "พัฒนาแอปพลิเคชันสำหรับองค์กรแบบ No-Code เพื่อจัดการข้อมูลและ Workflow", connect: ["Google Sheets", "Google Calendar", "Email Automation", "PDF Generation"] },
+  "Data Analysis": { desc: "รวบรวมและวิเคราะห์ข้อมูลเพื่อหาแนวโน้มและสรุปผลเพื่อการตัดสินใจ", connect: ["Google Looker Studio", "Excel Pivot Tables", "Business Reports"] },
+  "Manus AI": { desc: "ใช้งาน Autonomous AI Agent ในการช่วยเขียนโค้ด, วิเคราะห์ข้อมูล และจัดการระบบอัตโนมัติ", connect: ["GitHub", "Cloudflare", "SimilarWeb", "Automation"] },
+  "Gemini API": { desc: "เชื่อมต่อ AI Model ระดับสูงเพื่อสร้างระบบโต้ตอบและวิเคราะห์ข้อมูลอัจฉริยะ", connect: ["Chatbots", "Content Generation", "Data Processing"] }
 };
 
-const projects = [
-  { title: "Portfolio Website", desc: "เว็บไซต์รวบรวมผลงานและทักษะส่วนตัว พัฒนาด้วย React และ Tailwind CSS", url: "#", tags: ["React", "Tailwind", "Vite"], color: "from-blue-500 to-cyan-500", featured: true, problem: "ต้องการพื้นที่แสดงผลงานที่ดูเป็นมืออาชีพและเข้าถึงง่าย", solution: "สร้างเว็บไซต์แบบ Single Page Application ที่รองรับทุกหน้าจอ", result: "มีพื้นที่รวบรวมผลงานที่ชัดเจนและแชร์ให้ผู้สนใจดูได้ทันที" },
-  { title: "Real Estate Web Design", desc: "ออกแบบหน้าเว็บไซต์สำหรับธุรกิจอสังหาริมทรัพย์ เน้นความหรูหราและใช้งานง่าย", url: "https://www.canva.com/design/DAGX60_817M/8Y98Y98Y98Y98Y98Y98Y98/view", tags: ["Canva", "UI/UX", "Design"], color: "from-purple-500 to-pink-500", problem: "เว็บไซต์เดิมดูเก่าและใช้งานยากบนมือถือ", solution: "ออกแบบ UI ใหม่ที่เน้นความโปร่งใสและรูปภาพขนาดใหญ่", result: "ภาพลักษณ์แบรนด์ดูทันสมัยขึ้นและรองรับการใช้งานทุกอุปกรณ์" },
-  { title: "IT Support Dashboard", desc: "ระบบจัดการเคสแจ้งซ่อมและติดตามสถานะงานไอทีซัพพอร์ต", url: "#", tags: ["AppSheet", "Google Sheets"], color: "from-green-500 to-emerald-500", problem: "การแจ้งซ่อมผ่านไลน์ทำให้ข้อมูลตกหล่นและติดตามงานยาก", solution: "ใช้ AppSheet สร้างแอปแจ้งซ่อมที่เก็บข้อมูลลง Google Sheets อัตโนมัติ", result: "ติดตามสถานะงานได้ 100% และสรุปรายงานประจำเดือนได้ในคลิกเดียว" }
-];
-
 const mediaItems = [
-  { title: "Short Film Editing", type: "Video", icon: Film, url: "#", color: "text-red-400" },
-  { title: "Lo-fi Beats", type: "Music", icon: Music, url: "#", color: "text-purple-400" },
-  { title: "Brand Identity", type: "Graphic", icon: Palette, url: "#", color: "text-blue-400" }
+  { title: "My Creative Assets Folder", type: "folder", url: "https://drive.google.com/drive/folders/1uSlSHdOXbweXo0U8FxoGYkyBEkOnWoT2?usp=sharing", icon: Folder, color: "text-blue-400" },
+  { title: "Short Clip Showcase 1", type: "video", url: "https://drive.google.com/file/d/1MTxCRRwX0IpQMfCXEK50A_ml32mVRnds/view?usp=sharing", icon: Film, color: "text-pink-400" },
+  { title: "Short Clip Showcase 2", type: "video", url: "https://drive.google.com/file/d/14vRG2JB0gA7CNiw8Kq0ZZ80chWsx1li7/view?usp=sharing", icon: Film, color: "text-pink-400" },
+  { title: "Short Clip Showcase 3", type: "video", url: "https://drive.google.com/file/d/1b4BsMabp4SFESSE0oygtX04QWHH3gu9w/view?usp=sharing", icon: Film, color: "text-pink-400" },
+  { title: "AI Generated Music", type: "audio", url: "https://drive.google.com/file/d/16hruUsp0ooJEf_dNPEEHPMNBtb5M7Ji/view?usp=sharing", icon: Music, color: "text-green-400" }
 ];
 
 // --- COMPONENTS ---
-const TypingText = ({ texts, speed = 100, pause = 2000 }) => {
-  const [displayedText, setDisplayedText] = useState("");
+
+const Typewriter = ({ texts, speed = 100, pause = 2000 }) => {
+  const [displayedText, setDisplayedText] = useState('');
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [reverse, setReverse] = useState(false);
 
   useEffect(() => {
+    if (index >= texts.length) { setIndex(0); return; }
     if (subIndex === texts[index].length + 1 && !reverse) {
       const timeout = setTimeout(() => setReverse(true), pause);
       return () => clearTimeout(timeout);
@@ -189,186 +306,237 @@ const TypingText = ({ texts, speed = 100, pause = 2000 }) => {
   );
 };
 
-const SectionTitle = ({ title, subtitle, note }) => (
-  <div className="mb-16 text-left border-l-4 border-orange-600 pl-6">
-    <div className="flex items-center gap-2 text-orange-600 text-xs font-black tracking-[0.3em] mb-2">
-      <div className="w-2 h-2 bg-orange-600 rotate-45" />
-      {title}
-    </div>
-    <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 uppercase">
+const SectionTitle = ({ title, subtitle }) => (
+  <div className="mb-12 text-center">
+    <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-4 tracking-widest">
       {title}
     </h2>
-    {subtitle && <p className="text-gray-500 dark:text-gray-400 max-w-2xl font-medium">{subtitle}</p>}
+    {subtitle && <p className="text-gray-400 max-w-2xl mx-auto mb-4 font-light uppercase tracking-widest text-xs">{subtitle}</p>}
+    <div className="w-24 h-1 bg-orange-500 mx-auto mt-4 rounded-full"></div>
   </div>
 );
 
 const SkillBadge = ({ icon: Icon, label, onClick }) => (
   <button 
     onClick={onClick}
-    className="group relative flex items-center gap-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 px-6 py-3 rounded-none hover:bg-orange-600 hover:border-orange-600 transition-all cursor-pointer overflow-hidden"
+    className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-sm hover:bg-orange-500/20 transition-all cursor-pointer hover:scale-105 transform duration-200 hover:border-orange-500/50"
   >
-    <div className="absolute top-0 left-0 w-1 h-full bg-orange-600 group-hover:bg-white transition-colors" />
-    <Icon size={18} className="text-orange-600 group-hover:text-white transition-colors" />
-    <span className="text-sm font-black tracking-widest text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors uppercase">{label}</span>
+    <Icon size={18} className="text-orange-400" />
+    <span className="text-sm font-medium text-gray-200">{label}</span>
   </button>
 );
 
+const SkillModal = ({ skill, onClose }) => {
+  if (!skill) return null;
+  const details = skillDetails[skill.label] || { desc: "เครื่องมือที่ช่วยเพิ่มประสิทธิภาพการทำงาน", connect: ["General Use"] };
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={onClose}>
+      <div className="bg-gray-900 border border-orange-500/30 rounded-sm p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(249,115,22,0.2)]" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white"><X size={24} /></button>
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-4 bg-orange-500/20 rounded-sm border border-orange-500/30"><skill.icon size={40} className="text-orange-400" /></div>
+          <h3 className="text-2xl font-bold text-white tracking-widest">{skill.label}</h3>
+        </div>
+        <div className="space-y-6">
+          <div>
+            <h4 className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2"><Zap size={14} /> CAPABILITIES</h4>
+            <p className="text-gray-300 text-sm leading-relaxed border-l-2 border-orange-500/30 pl-3">{details.desc}</p>
+          </div>
+          <div>
+            <h4 className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2"><Share2 size={14} /> INTEGRATIONS</h4>
+            <div className="flex flex-wrap gap-2">
+              {details.connect.map((item, i) => (
+                <span key={i} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-xs font-medium">{item}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ExperienceTimeline = ({ items }) => (
+  <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-700 before:to-transparent">
+    {items.map((item, index) => (
+      <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-gray-900 text-gray-400 group-hover:border-orange-500 group-hover:text-orange-500 transition-all duration-500 z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+          <item.icon size={20} />
+        </div>
+        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-gray-900/50 p-6 rounded-sm border border-white/5 hover:border-orange-500/30 transition-all duration-300">
+          <div className="flex items-center justify-between space-x-2 mb-1">
+            <div className="font-bold text-white text-lg">{item.role}</div>
+            <time className="font-mono text-xs text-orange-500 font-bold">{item.period}</time>
+          </div>
+          <div className="text-gray-400 text-sm font-medium mb-2">{item.company}</div>
+          <div className="text-gray-500 text-sm leading-relaxed">{item.desc}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 const AppContent = () => {
+  const { isDark } = useTheme();
   const [lang, setLang] = useState('th');
-  const [activeSkill, setActiveSkill] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
+  const [selectedSkill, setSelectedSkill] = useState(null);
   const [aiInput, setAiInput] = useState("");
   const [aiResult, setAiResult] = useState("");
   const [isAiLoading, setIsAiLoading] = useState(false);
-  const { isDark } = useTheme();
 
   const t = content[lang];
 
-  const handleAiSubmit = async () => {
+  const handleAiSubmit = async (e) => {
+    e.preventDefault();
     if (!aiInput.trim() || !genAI) return;
     setIsAiLoading(true);
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `You are Kamphon, an IT Support and Automation expert. Suggest a solution using AppSheet or LINE API for: ${aiInput}. Keep it concise and professional in ${lang === 'th' ? 'Thai' : 'English'}. Mention that this analysis is powered by Manus AI.`;
+      const prompt = `You are Kamphon, an AI Automation Architect. Suggest a solution using AppSheet or LINE API for this task: ${aiInput}. Keep it concise and professional in ${lang === 'th' ? 'Thai' : 'English'}.`;
       const result = await model.generateContent(prompt);
       setAiResult(result.response.text());
     } catch (error) {
-      setAiResult("Error connecting to AI. Please try again later.");
+      setAiResult("Error generating solution. Please try again.");
     }
     setIsAiLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#0a0a0a] text-gray-900 dark:text-white transition-colors duration-300 font-sans selection:bg-orange-600 selection:text-white">
-      {/* Scanline Effect */}
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] dark:opacity-[0.05] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]" />
-      
+    <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'bg-[#0a0a0a] text-white' : 'bg-gray-50 text-gray-900'}`}>
       {/* Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.05] dark:opacity-[0.1] bg-[radial-gradient(#888_1px,transparent_1px)] [background-size:20px_20px]" />
-
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]" 
+           style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+      
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b-2 border-gray-200 dark:border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-orange-600 flex items-center justify-center text-white font-black text-xl">K</div>
-            <div className="text-xl font-black tracking-tighter uppercase">
-              KAMPHON<span className="text-orange-600">.</span>DEV
+      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/5">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-orange-500 rounded-sm flex items-center justify-center font-bold text-black">K</div>
+            <span className="font-bold tracking-widest text-lg hidden md:block">KAMPHON.SYS</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="hidden lg:flex gap-6 text-[10px] font-bold tracking-widest text-gray-400">
+              {Object.entries(t.nav).map(([key, val]) => (
+                <a key={key} href={`#${key}`} className="hover:text-orange-500 transition-colors">{val}</a>
+              ))}
             </div>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-[10px] font-black tracking-[0.2em] uppercase">
-            {Object.entries(t.nav).map(([key, label]) => (
-              <a key={key} href={`#${key}`} className="hover:text-orange-600 transition-colors relative group">
-                {label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all" />
-              </a>
-            ))}
-          </div>
-          <div className="flex items-center gap-4">
-            <button onClick={() => setLang(lang === 'th' ? 'en' : 'th')} className="text-[10px] font-black px-3 py-1 border-2 border-gray-900 dark:border-white hover:bg-orange-600 hover:border-orange-600 hover:text-white transition-all">
-              {lang.toUpperCase()}
-            </button>
-            <ThemeToggle />
+            <div className="flex items-center gap-3 border-l border-white/10 pl-6">
+              <ThemeToggle />
+              <button onClick={() => setLang(lang === 'th' ? 'en' : 'th')} className="text-xs font-bold hover:text-orange-500 transition-colors">
+                {lang === 'th' ? 'EN' : 'TH'}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-48 pb-32 px-6 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-[2px] bg-orange-600" />
-              <div className="text-orange-600 text-xs font-black tracking-[0.4em] uppercase animate-pulse">
-                {t.hero.greeting}
-              </div>
-            </div>
-            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
-              KAMPHON <br />
-              <span className="text-orange-600">
-                <TypingText texts={t.hero.roles} />
-              </span>
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-lg leading-relaxed font-medium border-l-2 border-gray-300 dark:border-white/20 pl-6">
-              {t.hero.desc}
-            </p>
-            <div className="flex flex-wrap gap-6">
-              <a href="#works" className="group relative px-10 py-5 bg-orange-600 text-white font-black tracking-widest uppercase overflow-hidden">
-                <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <span className="relative z-10 flex items-center gap-3">
-                  {t.hero.cta} <ArrowRight size={20} />
-                </span>
-              </a>
-              <div className="flex items-center gap-4 px-8 py-5 bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10">
-                <Activity size={20} className="text-orange-600 animate-pulse" />
-                <span className="text-[10px] font-black tracking-widest uppercase">{t.hero.latest}: MANUS AI INTEGRATED</span>
-              </div>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="relative w-full aspect-square border-2 border-gray-200 dark:border-white/10 p-4">
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-orange-600 -translate-x-2 -translate-y-2" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-orange-600 translate-x-2 translate-y-2" />
-              <div className="w-full h-full bg-gray-200 dark:bg-white/5 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-1000 grayscale group-hover:grayscale-0" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#f5f5f5] dark:from-[#0a0a0a] via-transparent to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="text-[10px] font-black tracking-[0.5em] text-orange-600 mb-2">OPERATOR IDENTIFIED</div>
-                  <div className="text-2xl font-black tracking-tighter uppercase">KAMPHON PRAYOONHAN</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <header className="relative z-10 pt-40 pb-20 md:pt-60 md:pb-32 px-6 container mx-auto text-center">
+        <div className="inline-block mb-4 px-4 py-1.5 rounded-sm bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold tracking-widest animate-pulse">
+          {t.hero.greeting}
         </div>
-      </section>
+        <h1 className="text-5xl md:text-8xl font-bold mb-6 tracking-tighter">
+          KAMPHON <span className="text-orange-500">P.</span>
+        </h1>
+        <div className="text-lg md:text-2xl text-gray-400 h-10 mb-8 font-light tracking-widest uppercase">
+          <Typewriter texts={t.hero.roles} />
+        </div>
+        <p className="text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+          {t.hero.desc}
+        </p>
+        <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
+          <a href="#works" className="px-10 py-4 bg-orange-500 text-black font-bold rounded-sm hover:bg-orange-400 transition-all flex items-center justify-center gap-2 tracking-widest text-xs">
+            <Layers size={18} /> {t.hero.cta}
+          </a>
+          <a href="#contact" className="px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-sm hover:bg-white/10 transition-all flex items-center justify-center gap-2 tracking-widest text-xs">
+            <Mail size={18} /> {t.nav.contact}
+          </a>
+        </div>
+      </header>
 
-      {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-white dark:bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle title={t.about.title} />
-          <div className="grid md:grid-cols-2 gap-16">
-            <div className="space-y-12">
-              <div className="relative p-10 bg-[#f5f5f5] dark:bg-white/5 border border-gray-200 dark:border-white/10">
-                <div className="absolute top-0 right-0 w-16 h-16 bg-orange-600/10 flex items-center justify-center">
-                  <User className="text-orange-600" />
+      {/* Profile Section */}
+      <section id="about" className="relative z-10 py-24 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div className="space-y-10">
+              <div>
+                <h3 className="text-xs font-bold text-orange-500 tracking-[0.3em] mb-8 flex items-center gap-3">
+                  <User size={16} /> {t.about.title}
+                </h3>
+                <div className="bg-gray-900/30 p-8 rounded-sm border border-white/5 space-y-6">
+                  <div className="flex items-start gap-4">
+                    <User size={20} className="text-gray-500 mt-1" />
+                    <div><span className="text-[10px] text-gray-500 block uppercase tracking-widest mb-1">Name</span><span className="text-white font-medium">{t.about.name}</span></div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Calendar size={20} className="text-gray-500 mt-1" />
+                    <div><span className="text-[10px] text-gray-500 block uppercase tracking-widest mb-1">Age</span><span className="text-white font-medium">{t.about.age}</span></div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <GraduationCap size={20} className="text-gray-500 mt-1" />
+                    <div><span className="text-[10px] text-gray-500 block uppercase tracking-widest mb-1">Education</span><span className="text-white font-medium">{t.about.education}</span></div>
+                  </div>
                 </div>
-                <h3 className="text-3xl font-black mb-6 uppercase tracking-tighter">{t.about.name}</h3>
-                <div className="flex gap-4 mb-8">
-                  <span className="px-4 py-1 bg-orange-600 text-white text-[10px] font-black uppercase tracking-widest">{t.about.age}</span>
-                  <span className="px-4 py-1 bg-gray-200 dark:bg-white/10 text-[10px] font-black uppercase tracking-widest">{t.about.education}</span>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{t.about.text}</p>
               </div>
-              <div className="p-10 bg-orange-600 text-white">
-                <h3 className="text-xl font-black mb-6 flex items-center gap-3 uppercase tracking-widest"><Smile /> {t.about.personality.title}</h3>
-                <p className="mb-8 opacity-90 font-medium leading-relaxed">{t.about.personality.desc}</p>
-                <div className="flex flex-wrap gap-3">
-                  {t.about.personality.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-2 bg-white/20 text-[10px] font-black uppercase tracking-widest">{tag}</span>
-                  ))}
+              <div className="bg-gray-900/20 p-8 rounded-sm border border-white/5">
+                <p className="text-gray-400 leading-relaxed italic mb-8 font-light">"{t.about.text}"</p>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-white/5 p-6 rounded-sm border border-white/5">
+                    <h4 className="text-orange-400 text-[10px] font-bold uppercase mb-4 flex items-center gap-2"><Smile size={14} /> {t.about.personality.title}</h4>
+                    <p className="text-gray-500 text-xs leading-relaxed mb-4">{t.about.personality.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {t.about.personality.tags.map((tag, i) => (
+                        <span key={i} className="text-[9px] px-2 py-1 bg-orange-500/10 text-orange-300 rounded-sm border border-orange-500/20 uppercase tracking-tighter">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-white/5 p-6 rounded-sm border border-white/5">
+                    <h4 className="text-blue-400 text-[10px] font-bold uppercase mb-4 flex items-center gap-2"><Lightbulb size={14} /> {t.about.workStyle.title}</h4>
+                    <p className="text-gray-500 text-xs leading-relaxed mb-4">{t.about.workStyle.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {t.about.workStyle.tags.map((tag, i) => (
+                        <span key={i} className="text-[9px] px-2 py-1 bg-blue-500/10 text-blue-300 rounded-sm border border-blue-500/20 uppercase tracking-tighter">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="p-10 bg-gray-900 text-white relative overflow-hidden group border-b-8 border-orange-600">
-              <div className="absolute top-0 right-0 p-48 bg-orange-600/10 rounded-full blur-[100px]" />
-              <div className="relative z-10">
-                <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-orange-500 uppercase tracking-widest"><Zap /> {t.about.workStyle.title}</h3>
-                <p className="mb-8 text-gray-300 font-medium leading-relaxed">{t.about.workStyle.desc}</p>
-                <div className="flex flex-wrap gap-3">
-                  {t.about.workStyle.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-2 bg-orange-600/20 border border-orange-600/30 text-[10px] font-black text-orange-400 uppercase tracking-widest">{tag}</span>
-                  ))}
+
+            <div className="bg-gray-900/30 p-8 rounded-sm border border-white/5 h-full">
+              <div className="flex justify-between items-center mb-10">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-[0.3em] flex items-center gap-2"><Terminal size={16} /> {t.skills.title}</h4>
+                <span className="text-[9px] text-orange-400 bg-orange-900/30 px-3 py-1 rounded-sm border border-orange-500/30 uppercase tracking-widest">{t.skills.subtitle}</span>
+              </div>
+              <div className="space-y-10">
+                <div>
+                  <span className="text-[10px] text-orange-400 mb-4 block uppercase tracking-[0.2em] font-bold">{t.skills.design}</span>
+                  <div className="flex flex-wrap gap-3">
+                    <SkillBadge icon={Layers} label="Photoshop" onClick={() => setSelectedSkill({icon: Layers, label: "Photoshop"})} />
+                    <SkillBadge icon={Palette} label="Illustrator" onClick={() => setSelectedSkill({icon: Palette, label: "Illustrator"})} />
+                    <SkillBadge icon={Video} label="Premiere Pro" onClick={() => setSelectedSkill({icon: Video, label: "Premiere Pro"})} />
+                    <SkillBadge icon={Play} label="CapCut" onClick={() => setSelectedSkill({icon: Play, label: "CapCut"})} />
+                    <SkillBadge icon={Globe} label="Canva" onClick={() => setSelectedSkill({icon: Globe, label: "Canva"})} />
+                  </div>
                 </div>
-                <div className="mt-16 pt-16 border-t border-white/10">
-                  <div className="text-[10px] font-black tracking-[0.5em] text-orange-600 mb-4">SYSTEM CORE VALUES</div>
-                  <div className="grid grid-cols-2 gap-8">
-                    <div>
-                      <div className="text-3xl font-black mb-1">100%</div>
-                      <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">DETERMINATION</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-black mb-1">0.1s</div>
-                      <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">RESPONSE TIME</div>
-                    </div>
+                <div>
+                  <span className="text-[10px] text-blue-400 mb-4 block uppercase tracking-[0.2em] font-bold">{t.skills.dev}</span>
+                  <div className="flex flex-wrap gap-3">
+                    <SkillBadge icon={Wrench} label="Hardware/Network" onClick={() => setSelectedSkill({icon: Wrench, label: "Hardware/Network"})} />
+                    <SkillBadge icon={Cpu} label="Printer Setup" onClick={() => setSelectedSkill({icon: Cpu, label: "Printer Setup"})} />
+                    <SkillBadge icon={FileText} label="Microsoft Office" onClick={() => setSelectedSkill({icon: FileText, label: "Microsoft Office"})} />
+                    <SkillBadge icon={Globe} label="Wordpress" onClick={() => setSelectedSkill({icon: Globe, label: "Wordpress"})} />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10px] text-green-400 mb-4 block uppercase tracking-[0.2em] font-bold">{t.skills.tools}</span>
+                  <div className="flex flex-wrap gap-3">
+                    <SkillBadge icon={Bot} label="LINE OA & API" onClick={() => setSelectedSkill({icon: Bot, label: "LINE OA & API"})} />
+                    <SkillBadge icon={Calendar} label="AppSheet" onClick={() => setSelectedSkill({icon: Calendar, label: "AppSheet"})} />
+                    <SkillBadge icon={BarChart} label="Data Analysis" onClick={() => setSelectedSkill({icon: BarChart, label: "Data Analysis"})} />
+                    <SkillBadge icon={Brain} label="Manus AI" onClick={() => setSelectedSkill({icon: Brain, label: "Manus AI"})} />
+                    <SkillBadge icon={Sparkles} label="Gemini API" onClick={() => setSelectedSkill({icon: Sparkles, label: "Gemini API"})} />
                   </div>
                 </div>
               </div>
@@ -377,98 +545,148 @@ const AppContent = () => {
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="exp" className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
+      {/* Timeline Section */}
+      <section id="exp" className="py-24 bg-black/20">
+        <div className="container mx-auto px-6">
           <SectionTitle title={t.experience.title} subtitle={t.experience.subtitle} />
-          <div className="space-y-8">
-            {t.experience.items.map((item, i) => (
-              <div key={i} className="group relative flex flex-col md:flex-row gap-8 p-10 bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 hover:border-orange-600 transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-600/5 -z-0" />
-                <div className="relative z-10 p-6 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 h-fit">
-                  <item.icon className="text-orange-600" size={40} />
+          <div className="max-w-4xl mx-auto"><ExperienceTimeline items={t.experience.items} /></div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="works" className="py-24 container mx-auto px-6">
+        <SectionTitle title={t.portfolio.title} subtitle={t.portfolio.subtitle} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {webProjects.map((project, index) => (
+            <div key={index} onClick={() => setActiveProject(project)} className="group relative bg-gray-900/50 border border-white/5 rounded-sm overflow-hidden hover:border-orange-500/50 transition-all duration-500 cursor-pointer">
+              <div className={`h-1 bg-gradient-to-r ${project.color}`} />
+              <div className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-3 bg-white/5 rounded-sm group-hover:bg-orange-500/20 transition-colors"><Layout size={24} className="text-gray-400 group-hover:text-orange-400" /></div>
+                  <ExternalLink size={18} className="text-gray-600 group-hover:text-white" />
                 </div>
-                <div className="relative z-10 flex-grow">
-                  <div className="flex flex-wrap justify-between items-start mb-6">
-                    <div>
-                      <h3 className="text-2xl font-black mb-2 uppercase tracking-tighter">{item.role}</h3>
-                      <p className="text-orange-600 font-black text-sm tracking-widest uppercase">{item.company}</p>
-                    </div>
-                    <span className="px-6 py-2 bg-gray-900 text-white text-[10px] font-black uppercase tracking-[0.2em]">{item.period}</span>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{item.desc}</p>
+                <h3 className="text-xl font-bold text-white mb-3 tracking-widest group-hover:text-orange-400 transition-colors">{project.title}</h3>
+                <p className="text-gray-500 text-sm mb-6 line-clamp-2 font-light">{project.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, i) => (
+                    <span key={i} className="text-[9px] px-2 py-1 bg-white/5 text-gray-400 border border-white/5 uppercase tracking-tighter">{tag}</span>
+                  ))}
                 </div>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Media Section */}
+      <section id="media" className="py-24 bg-gray-900/30 border-y border-white/5">
+        <div className="container mx-auto px-6">
+          <SectionTitle title={t.media.title} subtitle={t.media.subtitle} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {mediaItems.map((item, index) => (
+              <a key={index} href={item.url} target="_blank" rel="noopener noreferrer" className="bg-gray-900/50 border border-white/5 p-8 rounded-sm text-center group hover:border-blue-500/50 transition-all">
+                <div className="mb-4 flex justify-center"><item.icon size={32} className={`${item.color} group-hover:scale-110 transition-transform`} /></div>
+                <h3 className="text-xs font-bold text-white mb-2 tracking-widest uppercase">{item.title}</h3>
+                <span className="text-[9px] text-gray-600 uppercase tracking-widest">{item.type}</span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-32 px-6 bg-white dark:bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle title={t.skills.title} subtitle={t.skills.subtitle} />
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="space-y-8">
-              <h3 className="text-xs font-black tracking-[0.4em] text-orange-600 uppercase flex items-center gap-3">
-                <Palette size={16} /> {t.skills.design}
-              </h3>
-              <div className="grid gap-4">
-                {["Photoshop", "Illustrator", "Premiere Pro", "CapCut", "Canva"].map(s => (
-                  <SkillBadge key={s} icon={Palette} label={s} onClick={() => setActiveSkill({label: s, icon: Palette})} />
-                ))}
+      {/* AI Lab Section */}
+      <section id="ai" className="py-24 container mx-auto px-6">
+        <SectionTitle title={t.ai.title} subtitle={t.ai.subtitle} />
+        
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* AI Collaboration Visual UI */}
+          <div className="bg-gray-900/50 border border-orange-500/20 rounded-sm p-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-20 bg-orange-500/5 blur-3xl rounded-full"></div>
+            <h3 className="text-xs font-bold text-orange-500 tracking-[0.3em] mb-8 flex items-center gap-2">
+              <Workflow size={16} /> {t.ai.collaborationTitle}
+            </h3>
+            <p className="text-gray-500 text-xs mb-10 font-light">{t.ai.collaborationDesc}</p>
+            
+            <div className="space-y-8 relative">
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 bg-blue-500/20 rounded-sm border border-blue-500/30 flex items-center justify-center text-blue-400"><User size={24} /></div>
+                <div className="flex-grow h-px bg-gradient-to-r from-blue-500/50 to-orange-500/50 relative">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 border border-white/10 text-[8px] text-gray-400 uppercase tracking-widest">Natural Language</div>
+                </div>
+                <div className="w-12 h-12 bg-orange-500/20 rounded-sm border border-orange-500/30 flex items-center justify-center text-orange-400 animate-pulse"><Brain size={24} /></div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-white/5 p-4 rounded-sm border border-white/5 text-center group hover:border-orange-500/30 transition-all">
+                  <Github size={20} className="mx-auto mb-2 text-gray-400 group-hover:text-white" />
+                  <span className="text-[8px] text-gray-500 uppercase tracking-widest">GitHub</span>
+                </div>
+                <div className="bg-white/5 p-4 rounded-sm border border-white/5 text-center group hover:border-orange-500/30 transition-all">
+                  <Cloud size={20} className="mx-auto mb-2 text-gray-400 group-hover:text-white" />
+                  <span className="text-[8px] text-gray-500 uppercase tracking-widest">Cloudflare</span>
+                </div>
+                <div className="bg-white/5 p-4 rounded-sm border border-white/5 text-center group hover:border-orange-500/30 transition-all">
+                  <Database size={20} className="mx-auto mb-2 text-gray-400 group-hover:text-white" />
+                  <span className="text-[8px] text-gray-500 uppercase tracking-widest">SimilarWeb</span>
+                </div>
+              </div>
+
+              <div className="bg-orange-500/5 border border-orange-500/20 p-6 rounded-sm">
+                <h4 className="text-[10px] font-bold text-orange-400 mb-4 uppercase tracking-widest flex items-center gap-2"><Zap size={14} /> {t.ai.manusTitle}</h4>
+                <p className="text-gray-400 text-xs leading-relaxed font-light">{t.ai.manusDesc}</p>
               </div>
             </div>
-            <div className="space-y-8">
-              <h3 className="text-xs font-black tracking-[0.4em] text-orange-600 uppercase flex items-center gap-3">
-                <Wrench size={16} /> {t.skills.dev}
-              </h3>
-              <div className="grid gap-4">
-                {["Basic Hardware", "Software Setup", "Network Basic", "Basic Server"].map(s => (
-                  <SkillBadge key={s} icon={Wrench} label={s} onClick={() => setActiveSkill({label: s, icon: Wrench})} />
-                ))}
+          </div>
+
+          {/* AI Interaction */}
+          <div className="bg-gray-900/30 border border-white/5 rounded-sm p-8">
+            <form onSubmit={handleAiSubmit} className="space-y-6">
+              <textarea 
+                value={aiInput}
+                onChange={(e) => setAiInput(e.target.value)}
+                placeholder={t.ai.placeholder}
+                className="w-full h-40 bg-black/50 border border-white/10 rounded-sm p-6 text-sm text-white focus:border-orange-500/50 outline-none transition-all resize-none font-light"
+              />
+              <button 
+                type="submit" 
+                disabled={isAiLoading}
+                className="w-full py-4 bg-orange-500 text-black font-bold rounded-sm hover:bg-orange-400 transition-all flex items-center justify-center gap-3 tracking-widest text-xs disabled:opacity-50"
+              >
+                {isAiLoading ? <Clock className="animate-spin" size={18} /> : <Sparkles size={18} />}
+                {isAiLoading ? t.ai.loading : t.ai.button}
+              </button>
+            </form>
+            {aiResult && (
+              <div className="mt-8 p-6 bg-white/5 border border-orange-500/20 rounded-sm animate-in fade-in slide-in-from-bottom-4">
+                <h4 className="text-orange-400 text-[10px] font-bold uppercase mb-4 tracking-widest">{t.ai.resultTitle}</h4>
+                <p className="text-gray-300 text-sm leading-relaxed font-light whitespace-pre-wrap">{aiResult}</p>
               </div>
-            </div>
-            <div className="space-y-8">
-              <h3 className="text-xs font-black tracking-[0.4em] text-orange-600 uppercase flex items-center gap-3">
-                <Zap size={16} /> {t.skills.tools}
-              </h3>
-              <div className="grid gap-4">
-                {["AppSheet", "LINE API", "Google Workspace", "Automation"].map(s => (
-                  <SkillBadge key={s} icon={Zap} label={s} onClick={() => setActiveSkill({label: s, icon: Zap})} />
-                ))}
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section id="works" className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle title={t.portfolio.title} subtitle={t.portfolio.subtitle} />
-          <div className="grid md:grid-cols-3 gap-10">
-            {projects.map((project, i) => (
-              <div 
-                key={i} 
-                onClick={() => setActiveProject(project)}
-                className="group cursor-pointer bg-white dark:bg-[#111] border-2 border-gray-200 dark:border-white/10 hover:border-orange-600 transition-all overflow-hidden"
-              >
-                <div className="relative h-48 bg-gray-200 dark:bg-white/5 overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`} />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Layout size={64} className="text-gray-400 dark:text-white/10 group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <div className="absolute top-4 right-4 p-2 bg-black/50 text-white backdrop-blur-md">
-                    <ExternalLink size={16} />
+      {/* Hobbies Section */}
+      <section id="hobbies" className="py-24 bg-black/20 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <SectionTitle title={t.hobbies.title} subtitle={t.hobbies.subtitle} />
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {t.hobbies.items.map((hobby, index) => (
+              <div key={index} className="bg-gray-900/50 border border-white/5 rounded-sm overflow-hidden group hover:border-orange-500/30 transition-all">
+                <div className="h-48 overflow-hidden relative">
+                  <img src={hobby.img} alt={hobby.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                  <div className="absolute bottom-6 left-8">
+                    <div className="p-3 bg-orange-500/20 rounded-sm border border-orange-500/30 inline-block mb-3"><hobby.icon size={24} className="text-orange-400" /></div>
+                    <h3 className="text-xl font-bold text-white tracking-widest">{hobby.title}</h3>
                   </div>
                 </div>
                 <div className="p-8">
-                  <h3 className="text-2xl font-black mb-4 uppercase tracking-tighter group-hover:text-orange-600 transition-colors">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-8 font-medium leading-relaxed line-clamp-2">{project.desc}</p>
+                  <span className="text-[10px] text-orange-500 font-bold uppercase tracking-widest mb-2 block">{hobby.role}</span>
+                  <p className="text-gray-500 text-sm mb-6 font-light leading-relaxed">{hobby.desc}</p>
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, j) => (
-                      <span key={j} className="text-[9px] font-black uppercase tracking-widest px-3 py-1 bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10">{tag}</span>
+                    {hobby.tags.map((tag, i) => (
+                      <span key={i} className="text-[9px] px-2 py-1 bg-white/5 text-gray-400 border border-white/5 uppercase tracking-tighter">{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -478,122 +696,21 @@ const AppContent = () => {
         </div>
       </section>
 
-      {/* AI Lab Section (Manus Integration) */}
-      <section id="ai" className="py-32 px-6 bg-black text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-5 gap-16 items-center">
-            <div className="md:col-span-2 space-y-8">
-              <div className="inline-flex items-center gap-3 px-4 py-2 bg-orange-600 text-white text-[10px] font-black tracking-[0.3em] uppercase">
-                <Bot size={16} /> {t.ai.manusTitle}
-              </div>
-              <h2 className="text-5xl font-black tracking-tighter uppercase leading-[0.9]">
-                AI AGENT <br />
-                <span className="text-orange-600 text-3xl">COLLABORATION</span>
-              </h2>
-              <p className="text-gray-400 font-medium leading-relaxed">
-                {t.ai.manusDesc}
-              </p>
-              <div className="grid grid-cols-1 gap-4">
-                <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10">
-                  <Code className="text-orange-600" />
-                  <span className="text-[10px] font-black tracking-widest uppercase">Autonomous Coding</span>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10">
-                  <BarChart className="text-orange-600" />
-                  <span className="text-[10px] font-black tracking-widest uppercase">Data Analytics</span>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10">
-                  <Rocket className="text-orange-600" />
-                  <span className="text-[10px] font-black tracking-widest uppercase">Cloud Automation</span>
-                </div>
-              </div>
-            </div>
-            <div className="md:col-span-3">
-              <div className="bg-[#111] border-2 border-orange-600/50 p-10 relative">
-                <div className="absolute -top-1 -left-1 w-4 h-4 bg-orange-600" />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-orange-600" />
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-orange-600 text-white"><Brain size={32} /></div>
-                  <div>
-                    <h3 className="text-2xl font-black uppercase tracking-tighter">{t.ai.title}</h3>
-                    <p className="text-gray-500 text-xs font-bold tracking-widest uppercase">{t.ai.subtitle}</p>
-                  </div>
-                </div>
-                <div className="space-y-6">
-                  <textarea 
-                    value={aiInput}
-                    onChange={(e) => setAiInput(e.target.value)}
-                    placeholder={t.ai.placeholder}
-                    className="w-full h-40 bg-black border-2 border-white/10 p-6 focus:border-orange-600 outline-none transition-all resize-none font-medium text-gray-300"
-                  />
-                  <button 
-                    onClick={handleAiSubmit}
-                    disabled={isAiLoading}
-                    className="w-full py-5 bg-orange-600 text-white font-black tracking-[0.2em] uppercase hover:bg-orange-700 transition-all flex items-center justify-center gap-4 disabled:opacity-50"
-                  >
-                    {isAiLoading ? <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" /> : <Sparkles size={20} />}
-                    {t.ai.button}
-                  </button>
-                </div>
-                {aiResult && (
-                  <div className="mt-10 p-8 bg-orange-600/10 border border-orange-600/30 animate-in fade-in slide-in-from-bottom-4">
-                    <h4 className="font-black text-orange-500 mb-4 flex items-center gap-3 text-xs tracking-[0.2em] uppercase"><Bot size={18} /> {t.ai.resultTitle}</h4>
-                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap font-medium">{aiResult}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="py-20 px-6 border-t-2 border-gray-200 dark:border-white/10 text-center bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-center gap-8 mb-12">
-            <a href="#" className="group p-4 bg-gray-100 dark:bg-white/5 border border-transparent hover:border-orange-600 transition-all">
-              <Code size={24} className="group-hover:text-orange-600 transition-colors" />
-            </a>
-            <a href="#" className="group p-4 bg-gray-100 dark:bg-white/5 border border-transparent hover:border-orange-600 transition-all">
-              <Mail size={24} className="group-hover:text-orange-600 transition-colors" />
-            </a>
-            <a href="#" className="group p-4 bg-gray-100 dark:bg-white/5 border border-transparent hover:border-orange-600 transition-all">
-              <MessageCircle size={24} className="group-hover:text-orange-600 transition-colors" />
-            </a>
+      <footer className="py-12 border-t border-white/5 text-center">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-center gap-6 mb-8">
+            <a href="https://github.com/Safeiooi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors"><Github size={20} /></a>
+            <a href="mailto:kamphon203@gmail.com" className="text-gray-500 hover:text-white transition-colors"><Mail size={20} /></a>
+            <a href="tel:0956631135" className="text-gray-500 hover:text-white transition-colors"><Phone size={20} /></a>
           </div>
-          <div className="text-[10px] font-black tracking-[0.5em] text-gray-400 dark:text-gray-600 uppercase mb-4">
-            {t.footer.text}
-          </div>
-          <div className="flex justify-center items-center gap-4 opacity-30 grayscale">
-            <div className="w-8 h-8 bg-orange-600" />
-            <div className="w-8 h-8 bg-gray-400" />
-            <div className="w-8 h-8 bg-gray-600" />
-          </div>
+          <p className="text-[10px] text-gray-600 uppercase tracking-[0.4em] font-bold">{t.footer.text}</p>
         </div>
       </footer>
 
       {/* Modals */}
       {activeProject && <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />}
-      {activeSkill && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={() => setActiveSkill(null)}>
-          <div className="bg-white dark:bg-[#111] p-12 rounded-none border-2 border-orange-600 max-w-lg w-full relative" onClick={e => e.stopPropagation()}>
-            <div className="absolute -top-1 -left-1 w-4 h-4 bg-orange-600" />
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-orange-600" />
-            <button onClick={() => setActiveSkill(null)} className="absolute top-6 right-6 text-gray-400 hover:text-orange-600 transition-colors"><X size={32} /></button>
-            <div className="flex items-center gap-6 mb-10">
-              <div className="p-6 bg-orange-600/10 border border-orange-600/20 text-orange-600"><activeSkill.icon size={48} /></div>
-              <h3 className="text-4xl font-black uppercase tracking-tighter">{activeSkill.label}</h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-10 text-lg font-medium leading-relaxed">{skillDetails[activeSkill.label]?.desc}</p>
-            <div className="flex flex-wrap gap-3">
-              {skillDetails[activeSkill.label]?.connect.map(c => (
-                <span key={c} className="px-4 py-2 bg-orange-600/10 text-orange-600 border border-orange-600/20 text-[10px] font-black uppercase tracking-widest">{c}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      {selectedSkill && <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />}
     </div>
   );
 };
